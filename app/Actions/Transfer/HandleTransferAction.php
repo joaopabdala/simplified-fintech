@@ -2,6 +2,7 @@
 
 namespace App\Actions\Transfer;
 
+use App\Exceptions\TransferException;
 use App\Http\Enums\TransferTypeEnum;
 use App\Http\Enums\UserTypeEnum;
 use App\Models\Transfer;
@@ -15,7 +16,7 @@ class HandleTransferAction
     public function execute(User $payer, User $payee, float $value): Transfer
     {
         if ($payer->user_type == UserTypeEnum::SHOP) {
-            throw new \InvalidArgumentException("Shop type users can't do transfers");
+            throw TransferException::ShopTypeUsersCantTransfer();
         }
 
         return DB::transaction(function () use ($payer, $payee, $value) {
@@ -29,7 +30,7 @@ class HandleTransferAction
                 ->firstOrFail();
 
             if ($payerWallet->balance < $value) {
-                throw new \InvalidArgumentException('Insufficient balance.');
+                throw TransferException::InsufficientBalance();
             }
 
             $payerWallet->decrement('balance', $value);

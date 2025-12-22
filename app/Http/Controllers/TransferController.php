@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Transfer\HandleTransferAction;
+use App\Exceptions\TransferException;
 use App\Http\Requests\TransferRequest;
 use App\Http\Resources\TransferResource;
 use App\Models\Transfer;
@@ -34,11 +35,11 @@ class TransferController extends Controller
 
         try {
             $transfer = (new HandleTransferAction)->execute($payer, $payee, $value);
-        } catch (\InvalidArgumentException $e) {
-            return response()->json(['error' => $e->getMessage()], 422);
+        } catch (TransferException $e) {
+            Throw $e;
 
         } catch (Exception $e) {
-            Log::error('Trasnfer store error: ' . $e->getMessage());
+            Log::error('Transfer store error: ' . $e->getMessage());
             return response()->json([
                 'error' => 'Internal Server Error. Please try again later'
             ], 500);
