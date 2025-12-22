@@ -3,9 +3,6 @@
 namespace App\Services\Authorization\Adapters;
 
 use App\Services\Authorization\AuthorizationInterface;
-use App\Services\Authorization\UtilDeviAuthorizationService;
-use Illuminate\Support\Facades\Log;
-use function data_get;
 
 class MockedAuthorizationAdapter implements AuthorizationInterface
 {

@@ -4,12 +4,22 @@ namespace Tests\Feature;
 
 use App\Exceptions\TransferException;
 use App\Http\Enums\TransferTypeEnum;
+use App\Jobs\TransferNotificationJob;
 use App\Models\User;
 use App\Services\Authorization\AuthorizationInterface;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Queue;
 use Tests\TestCase;
 
 class TransferTest extends TestCase
 {
+    use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        Queue::fake();
+    }
     private function mockAuthorization(bool $authorized = true): void
     {
         $this->mock(AuthorizationInterface::class, function ($mock) use ($authorized) {
@@ -27,7 +37,7 @@ class TransferTest extends TestCase
         $payee = User::factory()->common()->create();
 
         $amountInWallet = 100.00;
-        $payer->wallet->increment('balance', $amountInWallet);
+        $payer->wallet->update(['balance' => $amountInWallet]);
         $amountPayment = 50.00;
         $response = $this->postJson('/api/transfer', [
             'payer' => $payer->id,
@@ -47,6 +57,10 @@ class TransferTest extends TestCase
 
         $this->assertEquals(50.00, $payer->wallet->refresh()->balance);
         $this->assertEquals(50.00, $payee->wallet->refresh()->balance);
+
+        $this->assertDatabaseCount('notifications', 2);
+
+        Queue::assertPushed(TransferNotificationJob::class, 2);
     }
 
     public function test_transfer_to_shop(): void
@@ -57,7 +71,7 @@ class TransferTest extends TestCase
         $payee = User::factory()->shop()->create();
 
         $amountInWallet = 100.00;
-        $payer->wallet->increment('balance', $amountInWallet);
+        $payer->wallet->update(['balance' => $amountInWallet]);
         $amountPayment = 50.00;
         $response = $this->postJson('/api/transfer', [
             'payer' => $payer->id,
@@ -77,15 +91,19 @@ class TransferTest extends TestCase
 
         $this->assertEquals(50.00, $payer->wallet->refresh()->balance);
         $this->assertEquals(50.00, $payee->wallet->refresh()->balance);
+
+        $this->assertDatabaseCount('notifications', 2);
+        Queue::assertPushed(TransferNotificationJob::class, 2);
     }
 
     public function test_shop_cant_transfer(): void
     {
+
         $payer = User::factory()->shop()->create();
         $payee = User::factory()->common()->create();
 
         $amountInWallet = 100.00;
-        $payer->wallet->increment('balance', $amountInWallet);
+        $payer->wallet->update(['balance' => $amountInWallet]);
         $amountPayment = 50.00;
         $response = $this->postJson('/api/transfer', [
             'payer' => $payer->id,
@@ -98,6 +116,8 @@ class TransferTest extends TestCase
         $response->assertJson([
             'error' => TransferException::ShopTypeUsersCantTransfer()->getMessage(),
         ]);
+
+        $this->assertDatabaseCount('notifications', 0);
     }
 
     public function test_cant_transfer_insufficient_value(): void
@@ -119,6 +139,8 @@ class TransferTest extends TestCase
         $response->assertJson([
             'error' => TransferException::InsufficientBalance()->getMessage(),
         ]);
+
+        $this->assertDatabaseCount('notifications', 0);
     }
 
     public function test_cannot_transfer_unauthorized(): void
@@ -145,5 +167,7 @@ class TransferTest extends TestCase
 
         $this->assertEquals(100.00, $payer->wallet->refresh()->balance);
         $this->assertEquals(0.00, $payee->wallet->refresh()->balance);
+
+        $this->assertDatabaseCount('notifications', 0);
     }
 }

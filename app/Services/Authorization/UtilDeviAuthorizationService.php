@@ -7,9 +7,7 @@ use Illuminate\Support\Facades\Http;
 
 class UtilDeviAuthorizationService
 {
-
     private $httpClient;
-
     private $endpoint;
     public function __construct()
     {
