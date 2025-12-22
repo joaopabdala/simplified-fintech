@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Http\Resources;
+
+use App\Http\Enums\TransferTypeEnum;
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class TransferResource extends JsonResource
+{
+    /**
+     * Transform the resource into an array.
+     *
+     * @return array<string, mixed>
+     */
+    public function toArray(Request $request): array
+    {
+        return [
+            'id' => $this->id,
+            'payee_wallet_id' => $this->payee_wallet_id,
+            'payer_wallet_id' => $this->payer_wallet_id,
+            'amount' => $this->amount,
+            'transfer_type' => $this->transfer_type,
+            'created_at' => $this->created_at
+        ];
+    }
+}
