@@ -37,6 +37,10 @@ return [
 
     'authorization' => [
         'provider' => env('AUTHORIZATION_SERVICE', 'util-devi-tools'),
+    ],
+
+    'notifications' => [
+        'provider' => env('NOTIFICATIONS_SERVICE', 'local'),
     ]
 
 ];
