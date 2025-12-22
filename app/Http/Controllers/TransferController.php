@@ -27,14 +27,14 @@ class TransferController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(TransferRequest $request)
+    public function store(TransferRequest $request, HandleTransferAction $handleTransferAction)
     {
         $payer = User::findOrFail($request->payer);
         $payee = User::findOrFail($request->payee);
         $value = $request->value;
 
         try {
-            $transfer = (new HandleTransferAction)->execute($payer, $payee, $value);
+            $transfer = $handleTransferAction->execute($payer, $payee, $value);
         } catch (TransferException $e) {
             Throw $e;
 

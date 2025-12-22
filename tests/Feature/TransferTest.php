@@ -2,19 +2,28 @@
 
 namespace Tests\Feature;
 
+use App\Exceptions\TransferException;
 use App\Http\Enums\TransferTypeEnum;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\Services\Authorization\AuthorizationInterface;
 use Tests\TestCase;
 
 class TransferTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     */
+
+    private function mockAuthorization(bool $authorized = true): void
+    {
+        $this->mock(AuthorizationInterface::class, function ($mock) use ($authorized) {
+            $mock->shouldReceive('isAuthorized')
+                ->once()
+                ->andReturn($authorized);
+        });
+    }
+
     public function test_transfer_between_users(): void
     {
+        $this->mockAuthorization();
+
         $payer = User::factory()->common()->create();
         $payee = User::factory()->common()->create();
 
@@ -32,8 +41,8 @@ class TransferTest extends TestCase
         $this->assertDatabaseHas('transfers', [
                 'payee_wallet_id' => $payee->wallet->id,
                 'payer_wallet_id' => $payer->wallet->id,
-                'amount'          => $amountPayment,
-                'transfer_type'   => TransferTypeEnum::USER_PAYMENT,
+                'amount' => $amountPayment,
+                'transfer_type' => TransferTypeEnum::USER_PAYMENT,
             ]
         );
 
@@ -43,6 +52,8 @@ class TransferTest extends TestCase
 
     public function test_transfer_to_shop(): void
     {
+        $this->mockAuthorization();
+
         $payer = User::factory()->common()->create();
         $payee = User::factory()->shop()->create();
 
@@ -60,8 +71,8 @@ class TransferTest extends TestCase
         $this->assertDatabaseHas('transfers', [
                 'payee_wallet_id' => $payee->wallet->id,
                 'payer_wallet_id' => $payer->wallet->id,
-                'amount'          => $amountPayment,
-                'transfer_type'   => TransferTypeEnum::SHOP_PAYMENT,
+                'amount' => $amountPayment,
+                'transfer_type' => TransferTypeEnum::SHOP_PAYMENT,
             ]
         );
 
@@ -83,11 +94,17 @@ class TransferTest extends TestCase
             'value' => $amountPayment,
         ]);
 
-        $response->assertStatus(422);
+        $response->assertStatus(TransferException::ShopTypeUsersCantTransfer()->getCode());
+
+        $response->assertJson([
+            'error' => TransferException::ShopTypeUsersCantTransfer()->getMessage(),
+        ]);
     }
 
     public function test_cant_transfer_insufficient_value(): void
     {
+        $this->mockAuthorization();
+
         $payer = User::factory()->common()->create();
         $payee = User::factory()->shop()->create();
 
@@ -98,6 +115,36 @@ class TransferTest extends TestCase
             'value' => $amountPayment,
         ]);
 
-        $response->assertStatus(422);
+        $response->assertStatus(TransferException::InsufficientBalance()->getCode());
+
+        $response->assertJson([
+            'error' => TransferException::InsufficientBalance()->getMessage(),
+        ]);
+    }
+
+    public function test_cannot_transfer_unauthorized(): void
+    {
+        $this->mockAuthorization(false);
+
+        $payer = User::factory()->common()->create();
+        $payee = User::factory()->common()->create();
+
+        $payer->wallet->update(['balance' => 100.00]);
+        $amountPayment = 50.00;
+
+        $response = $this->postJson('/api/transfer', [
+            'payer' => $payer->id,
+            'payee' => $payee->id,
+            'value' => $amountPayment,
+        ]);
+
+        $response->assertStatus(TransferException::NotAuthorized()->getCode());
+
+        $response->assertJson([
+            'error' => TransferException::NotAuthorized()->getMessage(),
+        ]);
+
+        $this->assertEquals(100.00, $payer->wallet->refresh()->balance);
+        $this->assertEquals(0.00, $payee->wallet->refresh()->balance);
     }
 }

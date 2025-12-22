@@ -16,11 +16,16 @@ class TransferException extends Exception
 
     public static function InsufficientBalance(): self
     {
-        return new self("Insufficient balance", 422);
+        return new self("Insufficient balance.", 422);
     }
 
     public static function ShopTypeUsersCantTransfer(): self
     {
-        return new self("Shop type users can't do transfers", 422);
+        return new self("Shop type users can't do transfers.", 422);
+    }
+
+    public static function NotAuthorized(): self
+    {
+        return new self("Not authorized.", 403);
     }
 }
