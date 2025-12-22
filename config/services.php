@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'authorization' => [
+        'provider' => env('AUTHORIZATION_SERVICE', 'util-devi-tools'),
+    ]
+
 ];
