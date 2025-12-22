@@ -25,6 +25,8 @@ class HandleTransferAction
             throw TransferException::ShopTypeUsersCantTransfer();
         }
 
+        $this->ensurePayerHasBalance($payer->wallet, $value);
+
         if (!$this->authorizer->isAuthorized()) {
             throw TransferException::NotAuthorized();
         }
@@ -39,9 +41,7 @@ class HandleTransferAction
                 ->lockForUpdate()
                 ->firstOrFail();
 
-            if ($payerWallet->balance < $value) {
-                throw TransferException::InsufficientBalance();
-            }
+            $this->ensurePayerHasBalance($payer->wallet, $value);
 
             $payerWallet->decrement('balance', $value);
             $payeeWallet->increment('balance', $value);
@@ -68,7 +68,7 @@ class HandleTransferAction
         $payeeNotification = $transfer->notifications()->create([
             'user_id' => $payee->id,
             'transfer_id' => $transfer->id,
-            'type'=> 'payee',
+            'type' => 'payee',
             'status' => NotificationStatusEnum::PENDING,
             'message' => "You received a transfer of {$transfer->amount} from {$payer->getFullName()}"
         ]);
@@ -76,7 +76,7 @@ class HandleTransferAction
         $payerNotification = $transfer->notifications()->create([
             'user_id' => $payer->id,
             'transfer_id' => $transfer->id,
-            'type'=> 'payee',
+            'type' => 'payee',
             'status' => NotificationStatusEnum::PENDING,
             'message' => "Your transfer of {$transfer->amount} was sended to {$payer->getFullName()}"
 
@@ -84,5 +84,12 @@ class HandleTransferAction
 
         TransferNotificationJob::dispatch($payeeNotification);
         TransferNotificationJob::dispatch($payerNotification);
+    }
+
+    private function ensurePayerHasBalance(Wallet $wallet, float $value): void
+    {
+        if ($wallet->balance < $value) {
+            throw TransferException::InsufficientBalance();
+        }
     }
 }
