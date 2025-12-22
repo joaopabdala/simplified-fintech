@@ -3,6 +3,7 @@
 namespace App\Services\Authorization;
 
 
+use App\Services\Authorization\Adapters\MockedAuthorizationAdapter;
 use App\Services\Authorization\Adapters\UtilDeviAuthorizationAdapter;
 
 class AuthorizationProvider
@@ -13,6 +14,7 @@ class AuthorizationProvider
 
         return match ($provider) {
             'util-devi-tools' => app(UtilDeviAuthorizationAdapter::class),
+            'local' => app(MockedAuthorizationAdapter::class),
             default => throw new \Exception("Provider '{$provider}' not supported")
         };
     }

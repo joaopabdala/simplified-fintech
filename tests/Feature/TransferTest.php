@@ -10,7 +10,6 @@ use Tests\TestCase;
 
 class TransferTest extends TestCase
 {
-
     private function mockAuthorization(bool $authorized = true): void
     {
         $this->mock(AuthorizationInterface::class, function ($mock) use ($authorized) {
