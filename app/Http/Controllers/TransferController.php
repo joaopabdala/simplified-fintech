@@ -41,9 +41,6 @@ class TransferController extends Controller
                 if ($payer->user_type == UserTypeEnum::SHOP) {
                     throw new \InvalidArgumentException("Shop type users can't do transfers");
                 }
-                $transferType = $payee->user_type == UserTypeEnum::COMMON
-                    ? TransferTypeEnum::USER_PAYMENT
-                    : TransferTypeEnum::SHOP_PAYMENT;
 
                 $payerWallet = Wallet::where('user_id', $payer->id)
                     ->lockForUpdate()
@@ -60,6 +57,10 @@ class TransferController extends Controller
                 $payerWallet->decrement('balance', $value);
                 $payeeWallet->increment('balance', $value);
 
+                $transferType = $payee->user_type == UserTypeEnum::COMMON
+                    ? TransferTypeEnum::USER_PAYMENT
+                    : TransferTypeEnum::SHOP_PAYMENT;
+
                 return Transfer::create([
                     'payer_wallet_id' => $payerWallet->id,
                     'payee_wallet_id' => $payeeWallet->id,
@@ -71,7 +72,7 @@ class TransferController extends Controller
             return response()->json(['error' => $e->getMessage()], 422);
 
         } catch (Exception $e) {
-            Log::error($e->getMessage());
+            Log::error('Trasnfer store error: ' . $e->getMessage());
             return response()->json([
                 'error' => 'Internal Server Error. Please try again later'
             ], 500);

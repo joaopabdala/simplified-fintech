@@ -26,8 +26,8 @@ class RegisterTest extends TestCase
         ];
 
         $response = $this->post('api/register', $userData);
-        $response->assertStatus(200);
-        
+        $response->assertStatus(201);
+
         $this->assertDatabaseHas('wallets', [
             'user_id' => $response->json('user.id')
         ]);

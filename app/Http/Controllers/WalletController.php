@@ -29,14 +29,8 @@ class WalletController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Wallet $wallet)
     {
-        try {
-            $wallet = Wallet::findOrFail($id);
-        } catch (ModelNotFoundException $e) {
-            return response()->json(['error' => 'Not found: ' . $e->getMessage()], 404);
-        }
-
         return WalletResource::make($wallet);
     }
 
