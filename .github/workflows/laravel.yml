@@ -42,3 +42,14 @@ jobs:
         DB_DATABASE: database/database.sqlite
         QUEUE_CONNECTION: sync
       run: php artisan test
+
+  laravel-pint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check Code Style (Laravel Pint)
+        run: |
+          docker run --rm -v $(pwd):/project -w /project jakzal/phpqa \
+          pint --test
