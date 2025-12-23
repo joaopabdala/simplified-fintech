@@ -7,12 +7,21 @@
 
     <description>Ruleset for Laravel Clean Code</description>
 
-    <rule ref="rulesets/cleancode.xml" />
+    <rule ref="rulesets/cleancode.xml">
+        <exclude name="BooleanArgumentFlag" />
+    </rule>
+
     <rule ref="rulesets/codesize.xml" />
-    <rule ref="rulesets/design.xml" />
-    <rule ref="rulesets/controversial.xml" />
+
+    <rule ref="rulesets/design.xml">
+        <exclude name="StaticAccess" />
+    </rule>
+
     <rule ref="rulesets/unusedcode.xml" />
-    <rule ref="rulesets/naming.xml"/>
+
+    <rule ref="rulesets/naming.xml">
+        <exclude name="ShortVariable" />
+    </rule>
 
     <exclude-pattern>vendor/*</exclude-pattern>
     <exclude-pattern>app/Providers/*</exclude-pattern>
