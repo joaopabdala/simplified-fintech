@@ -1,59 +1,55 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Simplified Fintech API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This is a simplified fintech application designed to simulate transactions between client and shop wallets.
 
-## About Laravel
+The registration methods exist primarily for data population purposes. Additionally, certain wallet and transfer GET methods are provided solely for demonstration; therefore, these endpoints are not authenticated and do not include security layers.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+The core feature of this application is the `POST /api/transfer` endpoint. It manages transfers between users (Common to Common or Common to Shop) while ensuring atomicity by implementing database row-level locking on the user's wallet and processing notifications via background jobs.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### External Services and Reliability
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Transfers integrate with external authorization and notification services. The system was originally designed to consume:
 
-## Learning Laravel
+* Authorization: `https://util.devi.tools/api/v2/authorize`
+* Notification: `https://util.devi.tools/api/v1/notify`
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+Due to the current instability of these providers, mock implementations were developed to simulate network delays and service failures, ensuring the application remains testable and resilient.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Transfer Flow
 
-## Laravel Sponsors
+The following diagram describes the business logic orchestrated by the `HandleTransferAction`:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```mermaid
+graph LR
+    Start((Start Transfer)) --> IsShop{Payer is a Shop?}
 
-### Premium Partners
+    IsShop -- Yes --> 403[403 Forbidden]
+    IsShop -- No --> Bal1{First Balance Check}
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+    Bal1 -- Insufficient --> 422a[422 Unprocessable Entity]
+    Bal1 -- Sufficient --> Auth{External Authorization}
 
-## Contributing
+    Auth -- Denied --> 401[401 Unauthorized]
+    Auth -- Approved --> Lock[Lock Wallet Row<br/>SELECT FOR UPDATE]
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    Lock --> Bal2{Second Balance Check}
 
-## Code of Conduct
+    Bal2 -- Insufficient --> Rollback[Rollback & 422 Error]
+    Bal2 -- Sufficient --> Update[Update Balances &<br/>Create Record]
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+    Update --> Commit[Commit Transaction]
+    Commit --> Notify[Dispatch Notifications]
+    Notify --> Success((201 Success))
 
-## Security Vulnerabilities
+    style 403 fill:#ff2c2c,color:#fff
+    style 422a fill:#ff2c2c,color:#fff
+    style 401 fill:#ff2c2c,color:#fff
+    style Rollback fill:#ff2c2c,color:#fff
+    style Success fill:#008000,color:#fff
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```
 
-## License
+## API Documentation
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The complete API documentation, generated via Scribe, is available at:
+`/docs`
