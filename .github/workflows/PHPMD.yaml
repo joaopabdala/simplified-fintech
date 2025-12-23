@@ -1,0 +1,19 @@
+name: Laravel Quality & Tests
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  code-quality:
+    name: Code Quality (PHPMD)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run PHPMD
+        run: |
+          docker run --rm -v $(pwd):/project -w /project jakzal/phpqa \
+          phpmd app text cleancode,codesize,controversial,design,naming,unusedcode
