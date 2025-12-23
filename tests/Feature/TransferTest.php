@@ -122,8 +122,6 @@ class TransferTest extends TestCase
 
     public function test_cant_transfer_insufficient_value(): void
     {
-        $this->mockAuthorization();
-
         $payer = User::factory()->common()->create();
         $payee = User::factory()->shop()->create();
 
