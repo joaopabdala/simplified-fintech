@@ -2,11 +2,10 @@
 
 namespace App\Actions\Transfer;
 
+use App\Events\TransferCompletedEvent;
 use App\Exceptions\TransferException;
-use App\Http\Enums\NotificationStatusEnum;
 use App\Http\Enums\TransferTypeEnum;
 use App\Http\Enums\UserTypeEnum;
-use App\Jobs\TransferNotificationJob;
 use App\Models\Transfer;
 use App\Models\User;
 use App\Models\Wallet;
@@ -56,32 +55,9 @@ class HandleTransferAction
             ]);
         });
 
-        $this->sendNotificationsFromTransfer($transfer, $payer, $payee);
+        event(new TransferCompletedEvent($transfer));
 
         return $transfer;
-    }
-
-    private function sendNotificationsFromTransfer(Transfer $transfer, User $payer, User $payee): void
-    {
-        $payeeNotification = $transfer->notifications()->create([
-            'user_id' => $payee->id,
-            'transfer_id' => $transfer->id,
-            'type' => 'payee',
-            'status' => NotificationStatusEnum::PENDING,
-            'message' => "You received a transfer of {$transfer->amount} from {$payer->getFullName()}",
-        ]);
-
-        $payerNotification = $transfer->notifications()->create([
-            'user_id' => $payer->id,
-            'transfer_id' => $transfer->id,
-            'type' => 'payee',
-            'status' => NotificationStatusEnum::PENDING,
-            'message' => "Your transfer of {$transfer->amount} was sended to {$payer->getFullName()}",
-
-        ]);
-
-        TransferNotificationJob::dispatch($payeeNotification);
-        TransferNotificationJob::dispatch($payerNotification);
     }
 
     private function ensurePayerHasBalance(Wallet $wallet, float $value): void
