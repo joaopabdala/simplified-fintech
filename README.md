@@ -4,7 +4,7 @@ This is a simplified fintech application designed to simulate transactions betwe
 
 The registration methods exist primarily for data population purposes. Additionally, certain wallet and transfer GET methods are provided solely for demonstration; therefore, these endpoints are not authenticated and do not include security layers.
 
-The core feature of this application is the `POST /api/transfer` endpoint. It manages transfers between users (Common to Common or Common to Shop) while ensuring atomicity by implementing database row-level locking on the user's wallet and processing notifications via background jobs.
+The core feature of this application is the `POST /api/transfer` endpoint. It manages transfers between users (Common to Common or Common to Shop) while ensuring atomicity by implementing database row-level locking on the user's wallet and dispatching an event to process notifications via background jobs.
 
 ### External Services and Reliability
 
@@ -38,7 +38,8 @@ graph LR
     Bal2 -- Sufficient --> Update[Update Balances &<br/>Create Record]
 
     Update --> Commit[Commit Transaction]
-    Commit --> Notify[Dispatch Notifications]
+    Commit --> Notify["Dispatch TransferCompletedEvent
+    (Notifications Job)"]
     Notify --> Success((201 Success))
 
     style 403 fill:#ff2c2c,color:#fff

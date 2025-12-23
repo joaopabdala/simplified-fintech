@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Http\Enums\TransferTypeEnum;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Transfer extends Model
@@ -22,5 +23,25 @@ class Transfer extends Model
     public function notifications(): HasMany
     {
         return $this->hasMany(Notification::class);
+    }
+
+    public function payerWallet(): BelongsTo
+    {
+        return $this->belongsTo(Wallet::class, 'payer_wallet_id');
+    }
+
+    public function payeeWallet(): BelongsTo
+    {
+        return $this->belongsTo(Wallet::class, 'payee_wallet_id');
+    }
+
+    public function getPayerIdAttribute()
+    {
+        return $this->payerWallet->user_id;
+    }
+
+    public function getPayeeIdAttribute()
+    {
+        return $this->payeeWallet->user_id;
     }
 }
