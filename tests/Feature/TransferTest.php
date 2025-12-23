@@ -45,7 +45,7 @@ class TransferTest extends TestCase
             'value' => $amountPayment,
         ]);
 
-        $response->assertStatus(400);
+        $response->assertStatus(201);
 
         $this->assertDatabaseHas('transfers', [
                 'payee_wallet_id' => $payee->wallet->id,
