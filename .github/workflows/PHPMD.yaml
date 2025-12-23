@@ -15,5 +15,6 @@ jobs:
 
       - name: Run PHPMD
         run: |
-          docker run --rm -v $(pwd):/project -w /project jakzal/phpqa \
-          phpmd app text cleancode,codesize,controversial,design,naming,unusedcode
+          docker run -it --rm -v $(pwd):/project -w /project jakzal/phpqa \
+          php -d error_reporting=22527 /tools/phpmd app text phpmd.xml
+
