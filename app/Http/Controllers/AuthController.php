@@ -10,8 +10,26 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
+/**
+ * @group Populating
+ *
+ * Utility endpoints for user registration and testing.
+ * Note: These routes are public and used solely to populate the system with test users.
+ */
 class AuthController extends Controller
 {
+    /**
+     * POST /api/register
+     *
+     * Create a user and a wallet.
+     *
+     * @bodyParam first_name string required Example: John
+     * @bodyParam last_name string required Example: Doe
+     * @bodyParam email string required Example: john@example.com
+     * @bodyParam document string required Example: 12345678901
+     * @bodyParam user_type string required common|shop. Example: common
+     * @bodyParam password string required Example: password
+     */
     public function register(RegisterRequest $request)
     {
         try {
@@ -43,6 +61,14 @@ class AuthController extends Controller
         }
     }
 
+    /**
+     * POST /api/login
+     *
+     * Get a bearer token.
+     *
+     * @bodyParam email string required Example: john@example.com
+     * @bodyParam password string required Example: password
+     */
     public function login(Request $request)
     {
         $user = User::where('email', $request->email)->first();

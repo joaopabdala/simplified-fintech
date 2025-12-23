@@ -6,6 +6,15 @@ use App\Http\Enums\UserTypeEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 
+/**
+ * @bodyParam first_name string required Example: John
+ * @bodyParam last_name string required Example: Doe
+ * @bodyParam email string required Example: john.doe@example.com
+ * @bodyParam document string required CPF or CNPJ. Example: 12345678901
+ * @bodyParam user_type string required common|shop. Example: common
+ * @bodyParam password string required Example: password123
+ * @bodyParam password_confirmation string required Must match password. Example: password123
+ */
 class RegisterRequest extends FormRequest
 {
     /**
