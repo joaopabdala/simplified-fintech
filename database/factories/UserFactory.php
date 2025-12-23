@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+
 use function fake;
 
 /**
@@ -29,7 +30,7 @@ class UserFactory extends Factory
         return [
             'first_name' => fake()->name(),
             'last_name' => fake()->name(),
-            'document'  => fake()->randomElement([
+            'document' => fake()->randomElement([
                 fake()->numerify('###########'),
                 fake()->numerify('##############'),
             ]),

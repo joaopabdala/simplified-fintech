@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Http\Enums\TransferTypeEnum;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -21,7 +20,7 @@ class TransferResource extends JsonResource
             'payer_wallet_id' => $this->payer_wallet_id,
             'amount' => $this->amount,
             'transfer_type' => $this->transfer_type,
-            'created_at' => $this->created_at
+            'created_at' => $this->created_at,
         ];
     }
 }

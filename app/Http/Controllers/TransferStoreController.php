@@ -9,6 +9,7 @@ use App\Http\Resources\TransferResource;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Log;
+
 use function response;
 
 class TransferStoreController extends Controller
@@ -25,14 +26,15 @@ class TransferStoreController extends Controller
         try {
             $transfer = $handleTransferAction->execute($payer, $payee, $value);
         } catch (TransferException $e) {
-            Throw $e;
-
+            throw $e;
         } catch (Exception $e) {
-            Log::error('Transfer store error: ' . $e->getMessage());
+            Log::error('Transfer store error: '.$e->getMessage());
+
             return response()->json([
-                'error' => 'Internal Server Error. Please try again later'
+                'error' => 'Internal Server Error. Please try again later',
             ], 500);
         }
+
         return TransferResource::make($transfer);
     }
 }

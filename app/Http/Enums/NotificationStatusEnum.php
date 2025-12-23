@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Enums;
+
 enum NotificationStatusEnum: string
 {
     case PENDING = 'pending';

@@ -13,9 +13,8 @@ class Notification extends Model
         'type',
         'status',
         'message',
-        'error_log'
+        'error_log',
     ];
-
 
     public function transfer(): BelongsTo
     {

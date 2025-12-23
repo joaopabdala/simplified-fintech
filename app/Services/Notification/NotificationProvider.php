@@ -2,7 +2,6 @@
 
 namespace App\Services\Notification;
 
-
 use App\Services\Notification\Adapters\MockedNotificationAdapter;
 
 class NotificationProvider

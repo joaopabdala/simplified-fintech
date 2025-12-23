@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Log;
 
 class MockedNotificationAdapter implements NotificationInterface
 {
-
     public function sendEmailMessage(string $email, string $message)
     {
         usleep(rand(100000, 500000));
@@ -19,6 +18,7 @@ class MockedNotificationAdapter implements NotificationInterface
         }
 
         Log::info("MockedNotificationAdapter: Message sent to $email: $message");
+
         return true;
     }
 }

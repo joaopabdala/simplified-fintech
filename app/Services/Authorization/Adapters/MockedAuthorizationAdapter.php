@@ -6,7 +6,6 @@ use App\Services\Authorization\AuthorizationInterface;
 
 class MockedAuthorizationAdapter implements AuthorizationInterface
 {
-
     public function isAuthorized(): bool
     {
         usleep(rand(100000, 500000));

@@ -12,11 +12,11 @@ class Transfer extends Model
         'payer_wallet_id',
         'payee_wallet_id',
         'amount',
-        'transfer_type'
+        'transfer_type',
     ];
 
     protected $casts = [
-        'transfer_type' => TransferTypeEnum::class
+        'transfer_type' => TransferTypeEnum::class,
     ];
 
     public function notifications(): HasMany
