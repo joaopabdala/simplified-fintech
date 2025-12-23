@@ -14,7 +14,6 @@ use function response;
 
 /**
  * @group Transfers
- *
  */
 class TransferStoreController extends Controller
 {
@@ -24,10 +23,13 @@ class TransferStoreController extends Controller
      * This endpoint triggers a peer-to-peer (P2P) or P2B transfer.
      * It validates balance, checks for external authorization, and processes
      * the transaction atomically to ensure data integrity.
+     *
      * * @authenticated
+     *
      * * @bodyParam payer int required The ID of the user sending the funds. Example: 1
      * @bodyParam payee int required The ID of the user/merchant receiving the funds. Example: 5
      * @bodyParam value float required The amount to be transferred. Must be greater than 0. Example: 100.50
+     *
      * * @response scenario=success {
      * "data": {
      * "id": 1024,

@@ -44,8 +44,11 @@ class WalletController extends Controller
      * POST /api/wallet/{id}/deposit
      * * Add money to a specific wallet. This operation creates a transfer record
      * of type "DEPOSIT" and updates the wallet balance atomically.
+     *
      * * @urlParam wallet int required The ID of the wallet. Example: 1
+     *
      * * @bodyParam amount float required The amount to deposit. Must be positive. Example: 500.00
+     *
      * * @response 200 {
      * "data": {
      * "id": 1,

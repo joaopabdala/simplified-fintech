@@ -32,6 +32,7 @@ class TransferController extends Controller
      * Retrieve full details of a specific transaction, including payer, payee, and transfer type.
      *
      * @urlParam transfer int required The ID of the transfer. Example: 1
+     *
      * @response 200 {
      * "data": {
      * "id": 1,

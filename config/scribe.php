@@ -1,21 +1,23 @@
 <?php
 
-use Knuckles\Scribe\Extracting\Strategies;
-use Knuckles\Scribe\Config\Defaults;
 use Knuckles\Scribe\Config\AuthIn;
-use function Knuckles\Scribe\Config\{removeStrategies, configureStrategy};
+use Knuckles\Scribe\Config\Defaults;
+use Knuckles\Scribe\Extracting\Strategies;
+
+use function Knuckles\Scribe\Config\configureStrategy;
+use function Knuckles\Scribe\Config\removeStrategies;
 
 // Only the most common configs are shown. See the https://scribe.knuckles.wtf/laravel/reference/config for all.
 
 return [
     // The HTML <title> for the generated documentation.
-    'title' => config('app.name') . ' API Documentation',
+    'title' => config('app.name').' API Documentation',
 
     // A short description of your API. Will be included in the docs webpage, Postman collection and OpenAPI spec.
     'description' => '',
 
     // Text to place in the "Introduction" section, right after the `description`. Markdown and HTML are supported.
-    'intro_text' => <<<INTRO
+    'intro_text' => <<<'INTRO'
     This is the documentation for the simplified fintech application. It aims to simulate transactions between clients and shop wallets.
 
     The registration methods exist only for data population purposes, and certain wallet and transfer GET methods are provided solely for demonstration. This is why these endpoints are not authenticated and do not include security layers.
@@ -83,7 +85,7 @@ INTRO,
     ],
 
     'external' => [
-        'html_attributes' => []
+        'html_attributes' => [],
     ],
 
     'try_it_out' => [
@@ -243,7 +245,7 @@ INTRO,
         ],
         'responseFields' => [
             ...Defaults::RESPONSE_FIELDS_STRATEGIES,
-        ]
+        ],
     ],
 
     // For response calls, API resource responses and transformer responses,

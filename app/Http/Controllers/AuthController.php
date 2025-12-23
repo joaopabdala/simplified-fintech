@@ -22,6 +22,7 @@ class AuthController extends Controller
      * POST /api/register
      *
      * Create a user and a wallet.
+     *
      * @bodyParam first_name string required Example: John
      * @bodyParam last_name string required Example: Doe
      * @bodyParam email string required Example: john@example.com
@@ -64,6 +65,7 @@ class AuthController extends Controller
      * POST /api/login
      *
      * Get a bearer token.
+     *
      * @bodyParam email string required Example: john@example.com
      * @bodyParam password string required Example: password
      */
