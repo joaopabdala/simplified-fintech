@@ -16,15 +16,16 @@ return [
 
     // Text to place in the "Introduction" section, right after the `description`. Markdown and HTML are supported.
     'intro_text' => <<<INTRO
-        This documentation aims to provide all the information you need to work with our API.
+    This is the documentation for the simplified fintech application. It aims to simulate transactions between clients and shop wallets.
 
-        <aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
-        You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).</aside>
-    INTRO,
+    The registration methods exist only for data population purposes, and certain wallet and transfer GET methods are provided solely for demonstration. This is why these endpoints are not authenticated and do not include security layers.
+
+    The main endpoint of this application is POST /api/transfer. It handles transfers between users (common to common or common to shop) while ensuring atomicity by locking the user's wallet in the database and sending notifications via background jobs.
+INTRO,
 
     // The base URL displayed in the docs.
     // If you're using `laravel` type, you can set this to a dynamic string, like '{{ config("app.tenant_url") }}' to get a dynamic base URL.
-    'base_url' => config("app.url"),
+    'base_url' => 'http://127.0.0.1',
 
     // Routes to include in the docs
     'routes' => [
@@ -230,16 +231,16 @@ return [
         'bodyParameters' => [
             ...Defaults::BODY_PARAMETERS_STRATEGIES,
         ],
-        'responses' => configureStrategy(
-            Defaults::RESPONSES_STRATEGIES,
+        'responses' => [
+            Strategies\Responses\UseResponseTag::class,
+            Strategies\Responses\UseResponseFileTag::class,
             Strategies\Responses\ResponseCalls::withSettings(
-                only: ['GET *'],
-                // Recommended: disable debug mode in response calls to avoid error stack traces in responses
+                only: [],
                 config: [
                     'app.debug' => false,
                 ]
-            )
-        ),
+            ),
+        ],
         'responseFields' => [
             ...Defaults::RESPONSE_FIELDS_STRATEGIES,
         ]

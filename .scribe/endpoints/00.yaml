@@ -1,5 +1,8 @@
-name: Endpoints
-description: ''
+name: Populating
+description: |-
+
+  Utility endpoints for user registration and testing.
+  Note: These routes are public and used solely to populate the system with test users.
 endpoints:
   -
     custom: []
@@ -8,12 +11,17 @@ endpoints:
     uri: api/register
     metadata:
       custom: []
-      groupName: Endpoints
-      groupDescription: ''
+      groupName: Populating
+      groupDescription: |-
+
+        Utility endpoints for user registration and testing.
+        Note: These routes are public and used solely to populate the system with test users.
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'POST /api/register'
+      description: |-
+        Create a user and a wallet.
+        * @bodyParam first_name string required Example: John
       authenticated: false
       deprecated: false
     headers:
@@ -27,34 +35,34 @@ endpoints:
       first_name:
         custom: []
         name: first_name
-        description: 'Must not be greater than 255 characters.'
+        description: ''
         required: true
-        example: b
+        example: John
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         deprecated: false
       last_name:
         custom: []
         name: last_name
-        description: 'Must not be greater than 255 characters.'
+        description: ''
         required: true
-        example: 'n'
+        example: Doe
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         deprecated: false
       email:
         custom: []
         name: email
-        description: 'Must be a valid email address.'
+        description: ''
         required: true
-        example: ashly64@example.com
+        example: john.doe@example.com
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         deprecated: false
       password:
@@ -62,57 +70,64 @@ endpoints:
         name: password
         description: ''
         required: true
-        example: architecto
+        example: password123
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         deprecated: false
       password_confirmation:
         custom: []
         name: password_confirmation
-        description: 'The value and <code>password</code> must match.'
+        description: 'Must match password.'
         required: true
-        example: architecto
+        example: password123
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         deprecated: false
       document:
         custom: []
         name: document
-        description: 'Must not be greater than 14 characters. Must be at least 11 characters.'
+        description: 'CPF or CNPJ.'
         required: true
-        example: ngzmiyvdljnikhwaykcmyuwpwl
+        example: '12345678901'
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         deprecated: false
       user_type:
         custom: []
         name: user_type
-        description: ''
+        description: common|shop.
         required: true
         example: common
         type: string
-        enumValues:
-          - common
-          - shop
-        exampleWasSpecified: false
+        enumValues: []
+        exampleWasSpecified: true
         nullable: false
         deprecated: false
     cleanBodyParameters:
-      first_name: b
-      last_name: 'n'
-      email: ashly64@example.com
-      password: architecto
-      password_confirmation: architecto
-      document: ngzmiyvdljnikhwaykcmyuwpwl
+      first_name: John
+      last_name: Doe
+      email: john.doe@example.com
+      password: password123
+      password_confirmation: password123
+      document: '12345678901'
       user_type: common
     fileParameters: []
-    responses: []
+    responses:
+      -
+        custom: []
+        status: 422
+        content: '{"message":"The document has already been taken.","errors":{"document":["The document has already been taken."]}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
     responseFields: []
     auth: []
     controller: null
@@ -125,270 +140,15 @@ endpoints:
     uri: api/login
     metadata:
       custom: []
-      groupName: Endpoints
-      groupDescription: ''
+      groupName: Populating
+      groupDescription: |-
+
+        Utility endpoints for user registration and testing.
+        Note: These routes are public and used solely to populate the system with test users.
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: api/user
-    metadata:
-      custom: []
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: api/wallet
-    metadata:
-      custom: []
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Display a listing of the resource.'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data":[{"id":3,"user_id":3,"balance":"70.60","user_type":"shop"},{"id":2,"user_id":2,"balance":"185.32","user_type":"common"},{"id":1,"user_id":1,"balance":"44.08","user_type":"common"}],"links":{"first":"http:\/\/localhost:8000\/api\/wallet?page=1","last":"http:\/\/localhost:8000\/api\/wallet?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"http:\/\/localhost:8000\/api\/wallet?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"http:\/\/localhost:8000\/api\/wallet","per_page":5,"to":3,"total":3}}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: 'api/wallet/{id}'
-    metadata:
-      custom: []
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Display the specified resource.'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      id:
-        custom: []
-        name: id
-        description: 'The ID of the wallet.'
-        required: true
-        example: 3
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      id: 3
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data":{"id":3,"user_id":3,"balance":"70.60","user_type":"shop"}}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - POST
-    uri: 'api/wallet/{wallet_id}/deposit'
-    metadata:
-      custom: []
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      wallet_id:
-        custom: []
-        name: wallet_id
-        description: 'The ID of the wallet.'
-        required: true
-        example: 3
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      wallet_id: 3
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      amount:
-        custom: []
-        name: amount
-        description: ''
-        required: true
-        example: 4326.41688
-        type: number
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanBodyParameters:
-      amount: 4326.41688
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: api/transfer
-    metadata:
-      custom: []
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Display a listing of the resource.'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data":[{"id":72,"payee_wallet_id":1,"payer_wallet_id":2,"amount":"10.12","transfer_type":"user_payment","created_at":"2025-12-22T20:33:03.000000Z"},{"id":71,"payee_wallet_id":3,"payer_wallet_id":2,"amount":"10.12","transfer_type":"shop_payment","created_at":"2025-12-22T20:32:50.000000Z"},{"id":70,"payee_wallet_id":3,"payer_wallet_id":2,"amount":"10.12","transfer_type":"shop_payment","created_at":"2025-12-22T19:50:15.000000Z"},{"id":69,"payee_wallet_id":3,"payer_wallet_id":2,"amount":"10.12","transfer_type":"shop_payment","created_at":"2025-12-22T19:50:11.000000Z"},{"id":68,"payee_wallet_id":2,"payer_wallet_id":1,"amount":"10.12","transfer_type":"user_payment","created_at":"2025-12-22T19:45:11.000000Z"}],"links":{"first":"http:\/\/localhost:8000\/api\/transfer?page=1","last":"http:\/\/localhost:8000\/api\/transfer?page=15","prev":null,"next":"http:\/\/localhost:8000\/api\/transfer?page=2"},"meta":{"current_page":1,"from":1,"last_page":15,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfer?page=1","label":"1","page":1,"active":true},{"url":"http:\/\/localhost:8000\/api\/transfer?page=2","label":"2","page":2,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfer?page=3","label":"3","page":3,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfer?page=4","label":"4","page":4,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfer?page=5","label":"5","page":5,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfer?page=6","label":"6","page":6,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfer?page=7","label":"7","page":7,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfer?page=8","label":"8","page":8,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfer?page=9","label":"9","page":9,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfer?page=10","label":"10","page":10,"active":false},{"url":null,"label":"...","active":false},{"url":"http:\/\/localhost:8000\/api\/transfer?page=14","label":"14","page":14,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfer?page=15","label":"15","page":15,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfer?page=2","label":"Next &raquo;","page":2,"active":false}],"path":"http:\/\/localhost:8000\/api\/transfer","per_page":5,"to":5,"total":71}}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - POST
-    uri: api/transfer
-    metadata:
-      custom: []
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Handle the incoming request.'
-      description: ''
+      title: 'POST /api/login'
+      description: 'Get a bearer token.'
       authenticated: false
       deprecated: false
     headers:
@@ -399,184 +159,37 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      value:
+      email:
         custom: []
-        name: value
+        name: email
         description: ''
         required: true
-        example: 4326.41688
-        type: number
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      payer:
-        custom: []
-        name: payer
-        description: 'The <code>id</code> of an existing record in the users table.'
-        required: true
-        example: architecto
+        example: john@example.com
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         deprecated: false
-      payee:
+      password:
         custom: []
-        name: payee
-        description: 'The <code>id</code> of an existing record in the users table.'
+        name: password
+        description: ''
         required: true
-        example: architecto
+        example: password
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         deprecated: false
     cleanBodyParameters:
-      value: 4326.41688
-      payer: architecto
-      payee: architecto
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: 'api/transfer/{id}'
-    metadata:
-      custom: []
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Display the specified resource.'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      id:
-        custom: []
-        name: id
-        description: 'The ID of the transfer.'
-        required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      id: 1
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
+      email: john@example.com
+      password: password
     fileParameters: []
     responses:
       -
         custom: []
         status: 200
-        content: '{"data":{"id":1,"payee_wallet_id":1,"payer_wallet_id":null,"amount":"100.00","transfer_type":"deposit","created_at":"2025-12-19T19:31:18.000000Z"}}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: api/transfers
-    metadata:
-      custom: []
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Display a listing of the resource.'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data":[{"id":72,"payee_wallet_id":1,"payer_wallet_id":2,"amount":"10.12","transfer_type":"user_payment","created_at":"2025-12-22T20:33:03.000000Z"},{"id":71,"payee_wallet_id":3,"payer_wallet_id":2,"amount":"10.12","transfer_type":"shop_payment","created_at":"2025-12-22T20:32:50.000000Z"},{"id":70,"payee_wallet_id":3,"payer_wallet_id":2,"amount":"10.12","transfer_type":"shop_payment","created_at":"2025-12-22T19:50:15.000000Z"},{"id":69,"payee_wallet_id":3,"payer_wallet_id":2,"amount":"10.12","transfer_type":"shop_payment","created_at":"2025-12-22T19:50:11.000000Z"},{"id":68,"payee_wallet_id":2,"payer_wallet_id":1,"amount":"10.12","transfer_type":"user_payment","created_at":"2025-12-22T19:45:11.000000Z"}],"links":{"first":"http:\/\/localhost:8000\/api\/transfers?page=1","last":"http:\/\/localhost:8000\/api\/transfers?page=15","prev":null,"next":"http:\/\/localhost:8000\/api\/transfers?page=2"},"meta":{"current_page":1,"from":1,"last_page":15,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfers?page=1","label":"1","page":1,"active":true},{"url":"http:\/\/localhost:8000\/api\/transfers?page=2","label":"2","page":2,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfers?page=3","label":"3","page":3,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfers?page=4","label":"4","page":4,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfers?page=5","label":"5","page":5,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfers?page=6","label":"6","page":6,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfers?page=7","label":"7","page":7,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfers?page=8","label":"8","page":8,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfers?page=9","label":"9","page":9,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfers?page=10","label":"10","page":10,"active":false},{"url":null,"label":"...","active":false},{"url":"http:\/\/localhost:8000\/api\/transfers?page=14","label":"14","page":14,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfers?page=15","label":"15","page":15,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfers?page=2","label":"Next &raquo;","page":2,"active":false}],"path":"http:\/\/localhost:8000\/api\/transfers","per_page":5,"to":5,"total":71}}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: 'api/transfers/{transfer_id}'
-    metadata:
-      custom: []
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Display the specified resource.'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      transfer_id:
-        custom: []
-        name: transfer_id
-        description: 'The ID of the transfer.'
-        required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      transfer_id: 1
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data":{"id":1,"payee_wallet_id":1,"payer_wallet_id":null,"amount":"100.00","transfer_type":"deposit","created_at":"2025-12-19T19:31:18.000000Z"}}'
+        content: '{"user":{"id":4,"email":"john@example.com","email_verified_at":null,"created_at":"2025-12-23T16:07:25.000000Z","updated_at":"2025-12-23T16:07:25.000000Z","first_name":"b","last_name":"Doe","document":"12345678901","user_type":"common"},"token":"5|W4cgvQzjO2KR1umNzQaUUWlbjxGkn10UoWfMHQ26551380dd"}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
