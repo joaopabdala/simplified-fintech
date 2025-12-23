@@ -14,7 +14,7 @@ class AuthController extends Controller
 {
     public function register(RegisterRequest $request)
     {
-        try{
+        try {
             $data = DB::transaction(function () use ($request) {
                 $user = User::create([
                     'first_name' => $request->first_name,
@@ -28,14 +28,17 @@ class AuthController extends Controller
                 Wallet::create([
                     'user_id' => $user->id,
                 ]);
+
                 return [
                     'user' => $user,
-                    'token' => $user->createToken('token')->plainTextToken
+                    'token' => $user->createToken('token')->plainTextToken,
                 ];
             });
+
             return response()->json($data, 201);
-        } catch(\Exception $e) {
-            Log::error('Register error: ' . $e->getMessage());
+        } catch (\Exception $e) {
+            Log::error('Register error: '.$e->getMessage());
+
             return response()->json(['error' => 'Failed to register.'], 500);
         }
     }
@@ -44,13 +47,13 @@ class AuthController extends Controller
     {
         $user = User::where('email', $request->email)->first();
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        if (! $user || ! Hash::check($request->password, $user->password)) {
             return response()->json(['error' => 'Invalid credentials'], 401);
         }
 
         return response()->json([
             'user' => $user,
-            'token' => $user->createToken('token')->plainTextToken
+            'token' => $user->createToken('token')->plainTextToken,
         ]);
     }
 }

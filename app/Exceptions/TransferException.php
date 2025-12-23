@@ -10,13 +10,13 @@ class TransferException extends Exception
     public function render($request): JsonResponse
     {
         return response()->json([
-            'error' => $this->getMessage()
+            'error' => $this->getMessage(),
         ], $this->getCode() ?: 422);
     }
 
     public static function InsufficientBalance(): self
     {
-        return new self("Insufficient balance.", 422);
+        return new self('Insufficient balance.', 422);
     }
 
     public static function ShopTypeUsersCantTransfer(): self
@@ -26,6 +26,6 @@ class TransferException extends Exception
 
     public static function NotAuthorized(): self
     {
-        return new self("Not authorized.", 403);
+        return new self('Not authorized.', 403);
     }
 }

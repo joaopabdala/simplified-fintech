@@ -2,6 +2,7 @@
 
 namespace App\Services\Authorization;
 
-interface AuthorizationInterface {
+interface AuthorizationInterface
+{
     public function isAuthorized(): bool;
 }

@@ -8,10 +8,9 @@ use App\Http\Resources\WalletResource;
 use App\Models\Transfer;
 use App\Models\Wallet;
 use Exception;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+
 use function response;
 
 class WalletController extends Controller
@@ -50,12 +49,13 @@ class WalletController extends Controller
                 ]);
             });
         } catch (Exception $e) {
-            Log::error("Deposit error: " . $e->getMessage());
+            Log::error('Deposit error: '.$e->getMessage());
+
             return response()->json([
-                'error' => 'Internal Server Error. Please try again later'
+                'error' => 'Internal Server Error. Please try again later',
             ], 500);
         }
+
         return WalletResource::make($wallet->refresh());
     }
-
 }

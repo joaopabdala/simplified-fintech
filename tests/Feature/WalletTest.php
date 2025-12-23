@@ -17,7 +17,7 @@ class WalletTest extends TestCase
         $wallet = $user->wallet;
         $depositAmount = 100;
         $response = $this->postJson(route('wallet.deposit', ['wallet' => $wallet->id]), [
-            'amount' => $depositAmount
+            'amount' => $depositAmount,
         ]);
 
         $response->assertStatus(200);
@@ -28,8 +28,8 @@ class WalletTest extends TestCase
         $this->assertDatabaseHas('transfers', [
             'payee_wallet_id' => $wallet->id,
             'payer_wallet_id' => null,
-            'amount'          => $depositAmount,
-            'transfer_type'   => TransferTypeEnum::DEPOSIT,
+            'amount' => $depositAmount,
+            'transfer_type' => TransferTypeEnum::DEPOSIT,
         ]);
     }
 }

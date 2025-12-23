@@ -15,9 +15,7 @@ use Illuminate\Support\Facades\DB;
 
 class HandleTransferAction
 {
-    public function __construct(protected AuthorizationInterface $authorizer)
-    {
-    }
+    public function __construct(protected AuthorizationInterface $authorizer) {}
 
     public function execute(User $payer, User $payee, float $value): Transfer
     {
@@ -27,7 +25,7 @@ class HandleTransferAction
 
         $this->ensurePayerHasBalance($payer->wallet, $value);
 
-        if (!$this->authorizer->isAuthorized()) {
+        if (! $this->authorizer->isAuthorized()) {
             throw TransferException::NotAuthorized();
         }
 
@@ -70,7 +68,7 @@ class HandleTransferAction
             'transfer_id' => $transfer->id,
             'type' => 'payee',
             'status' => NotificationStatusEnum::PENDING,
-            'message' => "You received a transfer of {$transfer->amount} from {$payer->getFullName()}"
+            'message' => "You received a transfer of {$transfer->amount} from {$payer->getFullName()}",
         ]);
 
         $payerNotification = $transfer->notifications()->create([
@@ -78,7 +76,7 @@ class HandleTransferAction
             'transfer_id' => $transfer->id,
             'type' => 'payee',
             'status' => NotificationStatusEnum::PENDING,
-            'message' => "Your transfer of {$transfer->amount} was sended to {$payer->getFullName()}"
+            'message' => "Your transfer of {$transfer->amount} was sended to {$payer->getFullName()}",
 
         ]);
 

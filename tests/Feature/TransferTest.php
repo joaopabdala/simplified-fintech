@@ -20,6 +20,7 @@ class TransferTest extends TestCase
         parent::setUp();
         Queue::fake();
     }
+
     private function mockAuthorization(bool $authorized = true): void
     {
         $this->mock(AuthorizationInterface::class, function ($mock) use ($authorized) {
@@ -48,11 +49,11 @@ class TransferTest extends TestCase
         $response->assertStatus(201);
 
         $this->assertDatabaseHas('transfers', [
-                'payee_wallet_id' => $payee->wallet->id,
-                'payer_wallet_id' => $payer->wallet->id,
-                'amount' => $amountPayment,
-                'transfer_type' => TransferTypeEnum::USER_PAYMENT,
-            ]
+            'payee_wallet_id' => $payee->wallet->id,
+            'payer_wallet_id' => $payer->wallet->id,
+            'amount' => $amountPayment,
+            'transfer_type' => TransferTypeEnum::USER_PAYMENT,
+        ]
         );
 
         $this->assertEquals(50.00, $payer->wallet->refresh()->balance);
@@ -82,11 +83,11 @@ class TransferTest extends TestCase
         $response->assertStatus(201);
 
         $this->assertDatabaseHas('transfers', [
-                'payee_wallet_id' => $payee->wallet->id,
-                'payer_wallet_id' => $payer->wallet->id,
-                'amount' => $amountPayment,
-                'transfer_type' => TransferTypeEnum::SHOP_PAYMENT,
-            ]
+            'payee_wallet_id' => $payee->wallet->id,
+            'payer_wallet_id' => $payer->wallet->id,
+            'amount' => $amountPayment,
+            'transfer_type' => TransferTypeEnum::SHOP_PAYMENT,
+        ]
         );
 
         $this->assertEquals(50.00, $payer->wallet->refresh()->balance);

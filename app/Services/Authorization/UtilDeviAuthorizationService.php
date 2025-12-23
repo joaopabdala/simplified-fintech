@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Http;
 class UtilDeviAuthorizationService
 {
     private $httpClient;
+
     private $endpoint;
+
     public function __construct()
     {
         $this->httpClient = Http::withHeaders([
@@ -20,6 +22,6 @@ class UtilDeviAuthorizationService
 
     public function authorize(): Response
     {
-        return $this->httpClient->retry(3,100)->get($this->endpoint);
+        return $this->httpClient->retry(3, 100)->get($this->endpoint);
     }
 }

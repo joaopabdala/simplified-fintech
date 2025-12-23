@@ -13,6 +13,7 @@ class TransferNotificationJob implements ShouldQueue
     use Queueable;
 
     public $tries = 5;
+
     public $backoff = [10, 30, 60, 120];
 
     /**
@@ -34,7 +35,7 @@ class TransferNotificationJob implements ShouldQueue
         );
 
         $this->notification->update([
-           'status' => NotificationStatusEnum::SENT
+            'status' => NotificationStatusEnum::SENT,
         ]);
     }
 
@@ -42,7 +43,7 @@ class TransferNotificationJob implements ShouldQueue
     {
         $this->notification->update([
             'status' => NotificationStatusEnum::FAILED,
-            'error_log' => $exception->getMessage()
+            'error_log' => $exception->getMessage(),
         ]);
     }
 }

@@ -17,7 +17,6 @@ class TransferController extends Controller
         return TransferResource::collection($transfers);
     }
 
-
     /**
      * Display the specified resource.
      */

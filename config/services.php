@@ -41,6 +41,6 @@ return [
 
     'notifications' => [
         'provider' => env('NOTIFICATIONS_SERVICE', 'local'),
-    ]
+    ],
 
 ];

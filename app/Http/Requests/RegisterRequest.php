@@ -37,8 +37,9 @@ class RegisterRequest extends FormRequest
     public function messages(): array
     {
         $values = collect(UserTypeEnum::cases())->pluck('value')->implode(', ');
+
         return [
-            'user_type.Illuminate\Validation\Rules\Enum' => 'The selected user type is invalid. It must be one of the following: ' . $values,
+            'user_type.Illuminate\Validation\Rules\Enum' => 'The selected user type is invalid. It must be one of the following: '.$values,
         ];
     }
 }
