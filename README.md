@@ -50,7 +50,17 @@ graph LR
 
 ```
 
+## Observability & Resiliency
+
+* **Telescope:** Integrated to observe jobs, events, logs, commands, and exceptions. It can be accessed at `/telescope` in local environment.
+* **Self-Healing (Scheduler):** A periodic task ensures that any failed notification is eventually re-processed (Queue Retry), maintaining eventual consistency even during prolonged external service downtime.
+* **Queue Strategies:** Implementation of exponential backoff and multiple retries for asynchronous tasks.
+
+
 ## API Documentation
 
 The complete API documentation, generated via Scribe, is available at:
 `/docs`
+
+
+
