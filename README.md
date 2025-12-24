@@ -53,6 +53,7 @@ graph LR
 ## Observability & Resiliency
 
 * **Telescope:** Integrated to observe jobs, events, logs, commands, and exceptions. It can be accessed at `/telescope` in local environment.
+  * **TraceId:** Integrated via Laravel 11's Context to provide full cross-service request tracing. It correlates HTTP requests with their respective logs and background jobs. Can be observed in Laravel Telescope.
 * **Self-Healing (Scheduler):** A periodic task ensures that any failed notification is eventually re-processed (Queue Retry), maintaining eventual consistency even during prolonged external service downtime.
 * **Queue Strategies:** Implementation of exponential backoff and multiple retries for asynchronous tasks.
 
