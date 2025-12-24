@@ -25,6 +25,7 @@ class TransferStoreController extends Controller
      * the transaction atomically to ensure data integrity.
      *
      * @header X-Idempotency-Key string A unique UUID to prevent duplicate transactions. Example: 550e8400-e29b-41d4-a716-446655440000
+     *
      * @bodyParam payer int required The ID of the user sending the funds. Example: 1
      * @bodyParam payee int required The ID of the user/merchant receiving the funds. Example: 5
      * @bodyParam value float required The amount to be transferred. Must be greater than 0. Example: 100.50

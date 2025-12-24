@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Symfony\Component\HttpFoundation\Response;
+
 use function json_decode;
 
 class IdempotencyKeysMiddleware
@@ -19,7 +20,7 @@ class IdempotencyKeysMiddleware
     {
         $key = $request->header('X-Idempotency-Key');
 
-        if (!$key) {
+        if (! $key) {
             return $next($request);
         }
 
