@@ -8,7 +8,6 @@ use App\Http\Requests\TransferRequest;
 use App\Http\Resources\TransferResource;
 use App\Models\User;
 use Exception;
-use Illuminate\Support\Facades\Context;
 use Illuminate\Support\Facades\Log;
 
 use function response;
@@ -71,7 +70,7 @@ class TransferStoreController extends Controller
                 'error' => 'Internal Server Error. Please try again later.',
             ], 500);
         }
-        Log::info('Testando TraceID', ['id' => Context::get('traceId')]);
+
         return TransferResource::make($transfer);
     }
 }

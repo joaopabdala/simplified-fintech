@@ -9,7 +9,6 @@ use App\Services\Notification\NotificationProvider;
 use Illuminate\Support\Facades\Context;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
-use Laravel\Telescope\EntryType;
 use Laravel\Telescope\IncomingEntry;
 use Laravel\Telescope\Telescope;
 
@@ -38,12 +37,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if (!Context::has('traceId')) {
+        if (! Context::has('traceId')) {
             Context::add('traceId', (string) Str::uuid());
         }
 
         Telescope::tag(function (IncomingEntry $entry) {
-            return ['traceId:' . Context::get('traceId')];
+            return ['traceId:'.Context::get('traceId')];
         });
     }
 }
