@@ -169,4 +169,43 @@ class TransferTest extends TestCase
 
         $this->assertDatabaseCount('notifications', 0);
     }
+
+    public function test_idempotency_middleware(): void
+    {
+
+        $this->mock(AuthorizationInterface::class, function ($mock) {
+            $mock->shouldReceive('isAuthorized')
+                ->once()
+                ->andReturn(true);
+        });
+
+        $payer = User::factory()->common()->create();
+        $payee = User::factory()->common()->create();
+        $idempotencyKey = 'test-key-123';
+
+        $payer->wallet()->update(['balance' => 1000.00]);
+
+        $payload = [
+            'payer' => $payer->id,
+            'payee' => $payee->id,
+            'value' => 100.00,
+        ];
+
+        $response1 = $this->withHeader('X-Idempotency-Key', $idempotencyKey)
+            ->postJson('/api/transfer', $payload);
+
+        $response1->assertStatus(201);
+
+        $this->assertEquals(900, $payer->wallet->refresh()->balance);
+
+        $response2 = $this->withHeader('X-Idempotency-Key', $idempotencyKey)
+            ->postJson('/api/transfer', $payload);
+
+        $response2->assertStatus(200);
+
+        $this->assertEquals(900, $payer->wallet->refresh()->balance);
+        $this->assertEquals($response1->json(), $response2->json());
+
+        Queue::assertPushed(TransferNotificationJob::class, 2);
+    }
 }
