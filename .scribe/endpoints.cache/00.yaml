@@ -121,8 +121,11 @@ endpoints:
     responses:
       -
         custom: []
-        status: 422
-        content: '{"message":"The document has already been taken.","errors":{"document":["The document has already been taken."]}}'
+        status: 500
+        content: |-
+          {
+              "message": "Server Error"
+          }
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -188,8 +191,11 @@ endpoints:
     responses:
       -
         custom: []
-        status: 200
-        content: '{"user":{"id":4,"email":"john@example.com","email_verified_at":null,"created_at":"2025-12-23T16:07:25.000000Z","updated_at":"2025-12-23T16:07:25.000000Z","first_name":"b","last_name":"Doe","document":"12345678901","user_type":"common"},"token":"7|OwMyIXZTVJOXpL1Q02nOfTtLUJNNp4JLvngctebv55da9b42"}'
+        status: 500
+        content: |-
+          {
+              "message": "Server Error"
+          }
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json

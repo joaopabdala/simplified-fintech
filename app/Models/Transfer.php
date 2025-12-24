@@ -34,14 +34,4 @@ class Transfer extends Model
     {
         return $this->belongsTo(Wallet::class, 'payee_wallet_id');
     }
-
-    public function getPayerIdAttribute()
-    {
-        return $this->payerWallet->user_id;
-    }
-
-    public function getPayeeIdAttribute()
-    {
-        return $this->payeeWallet->user_id;
-    }
 }

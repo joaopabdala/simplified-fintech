@@ -21,7 +21,7 @@ class RetryNotificationsCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Retry failed notifications';
 
     /**
      * Execute the console command.
