@@ -83,7 +83,7 @@ docker run --rm \
     -v "$(pwd):/var/www/html" \
     -w /var/www/html \
     laravelsail/php84-composer:latest \
-    composer install --ignore-platform-reqs
+    composer install --ignore-platform-reqs --no-scripts
 
 ```
 
