@@ -4,7 +4,7 @@ This is a simplified fintech application designed to simulate transactions betwe
 
 The registration methods exist primarily for data population purposes. Additionally, certain wallet and transfer GET methods are provided solely for demonstration; therefore, these endpoints are not authenticated and do not include security layers.
 
-The core feature of this application is the `POST /api/transfer` endpoint. It manages transfers between users (Common to Common or Common to Shop) while ensuring atomicity by implementing database row-level locking on the user's wallet and dispatching an event to process notifications via background jobs.
+The core feature of this application is the `POST /api/transfer` endpoint. It manages transfers between users (Common to Common or Common to Shop) while ensuring atomicity by implementing database row-level locking on the user's wallet and dispatching an event to process notifications via background jobs. It also accepts an X-Idempotency-Key header to prevent duplicate transfers.
 
 ### External Services and Reliability
 
@@ -64,4 +64,45 @@ The complete API documentation, generated via Scribe, is available at:
 `/docs`
 
 
+## How to Run
+
+The application uses **Laravel Sail** to manage the Docker environment. Follow these steps to set up the project:
+
+1. **Prepare Environment**
+```bash
+cp .env.example .env
+
+```
+
+
+2. **Install Dependencies**
+   (Run this to install dependencies via Docker if you don't have PHP/Composer installed locally)
+```bash
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v "$(pwd):/var/www/html" \
+    -w /var/www/html \
+    laravelsail/php84-composer:latest \
+    composer install --ignore-platform-reqs
+
+```
+
+
+3. **Start Containers**
+```bash
+./vendor/bin/sail up -d
+
+```
+
+
+4. **Initialize Application**
+```bash
+./vendor/bin/sail artisan key:generate
+./vendor/bin/sail artisan migrate
+```
+
+5. **Run tests**
+```bash
+./vendor/bin/sail artisan test
+```
 
