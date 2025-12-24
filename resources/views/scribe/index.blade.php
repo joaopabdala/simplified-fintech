@@ -207,7 +207,7 @@ fetch(url, {
 
 <span id="example-responses-POSTapi-register">
             <blockquote>
-            <p>Example response (422):</p>
+            <p>Example response (500):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -219,12 +219,7 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;The document has already been taken.&quot;,
-    &quot;errors&quot;: {
-        &quot;document&quot;: [
-            &quot;The document has already been taken.&quot;
-        ]
-    }
+    &quot;message&quot;: &quot;Server Error&quot;
 }</code>
  </pre>
     </span>
@@ -434,7 +429,7 @@ fetch(url, {
 
 <span id="example-responses-POSTapi-login">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (500):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -446,18 +441,7 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;user&quot;: {
-        &quot;id&quot;: 4,
-        &quot;email&quot;: &quot;john@example.com&quot;,
-        &quot;email_verified_at&quot;: null,
-        &quot;created_at&quot;: &quot;2025-12-23T16:07:25.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2025-12-23T16:07:25.000000Z&quot;,
-        &quot;first_name&quot;: &quot;b&quot;,
-        &quot;last_name&quot;: &quot;Doe&quot;,
-        &quot;document&quot;: &quot;12345678901&quot;,
-        &quot;user_type&quot;: &quot;common&quot;
-    },
-    &quot;token&quot;: &quot;7|OwMyIXZTVJOXpL1Q02nOfTtLUJNNp4JLvngctebv55da9b42&quot;
+    &quot;message&quot;: &quot;Server Error&quot;
 }</code>
  </pre>
     </span>
@@ -606,7 +590,7 @@ fetch(url, {
 
 <span id="example-responses-GETapi-transfer">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (500):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -618,154 +602,7 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;data&quot;: [
-        {
-            &quot;id&quot;: 108,
-            &quot;payee_wallet_id&quot;: 2,
-            &quot;payer_wallet_id&quot;: 1,
-            &quot;amount&quot;: &quot;1.12&quot;,
-            &quot;transfer_type&quot;: &quot;user_payment&quot;,
-            &quot;created_at&quot;: &quot;2025-12-24T14:39:25.000000Z&quot;
-        },
-        {
-            &quot;id&quot;: 107,
-            &quot;payee_wallet_id&quot;: 2,
-            &quot;payer_wallet_id&quot;: 1,
-            &quot;amount&quot;: &quot;1.12&quot;,
-            &quot;transfer_type&quot;: &quot;user_payment&quot;,
-            &quot;created_at&quot;: &quot;2025-12-24T14:37:47.000000Z&quot;
-        },
-        {
-            &quot;id&quot;: 106,
-            &quot;payee_wallet_id&quot;: 2,
-            &quot;payer_wallet_id&quot;: 1,
-            &quot;amount&quot;: &quot;1.12&quot;,
-            &quot;transfer_type&quot;: &quot;user_payment&quot;,
-            &quot;created_at&quot;: &quot;2025-12-24T14:37:01.000000Z&quot;
-        },
-        {
-            &quot;id&quot;: 105,
-            &quot;payee_wallet_id&quot;: 2,
-            &quot;payer_wallet_id&quot;: 1,
-            &quot;amount&quot;: &quot;1.12&quot;,
-            &quot;transfer_type&quot;: &quot;user_payment&quot;,
-            &quot;created_at&quot;: &quot;2025-12-24T14:36:34.000000Z&quot;
-        },
-        {
-            &quot;id&quot;: 104,
-            &quot;payee_wallet_id&quot;: 2,
-            &quot;payer_wallet_id&quot;: 1,
-            &quot;amount&quot;: &quot;1.12&quot;,
-            &quot;transfer_type&quot;: &quot;user_payment&quot;,
-            &quot;created_at&quot;: &quot;2025-12-24T14:35:17.000000Z&quot;
-        }
-    ],
-    &quot;links&quot;: {
-        &quot;first&quot;: &quot;http://localhost:8000/api/transfer?page=1&quot;,
-        &quot;last&quot;: &quot;http://localhost:8000/api/transfer?page=21&quot;,
-        &quot;prev&quot;: null,
-        &quot;next&quot;: &quot;http://localhost:8000/api/transfer?page=2&quot;
-    },
-    &quot;meta&quot;: {
-        &quot;current_page&quot;: 1,
-        &quot;from&quot;: 1,
-        &quot;last_page&quot;: 21,
-        &quot;links&quot;: [
-            {
-                &quot;url&quot;: null,
-                &quot;label&quot;: &quot;&amp;laquo; Previous&quot;,
-                &quot;page&quot;: null,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://localhost:8000/api/transfer?page=1&quot;,
-                &quot;label&quot;: &quot;1&quot;,
-                &quot;page&quot;: 1,
-                &quot;active&quot;: true
-            },
-            {
-                &quot;url&quot;: &quot;http://localhost:8000/api/transfer?page=2&quot;,
-                &quot;label&quot;: &quot;2&quot;,
-                &quot;page&quot;: 2,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://localhost:8000/api/transfer?page=3&quot;,
-                &quot;label&quot;: &quot;3&quot;,
-                &quot;page&quot;: 3,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://localhost:8000/api/transfer?page=4&quot;,
-                &quot;label&quot;: &quot;4&quot;,
-                &quot;page&quot;: 4,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://localhost:8000/api/transfer?page=5&quot;,
-                &quot;label&quot;: &quot;5&quot;,
-                &quot;page&quot;: 5,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://localhost:8000/api/transfer?page=6&quot;,
-                &quot;label&quot;: &quot;6&quot;,
-                &quot;page&quot;: 6,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://localhost:8000/api/transfer?page=7&quot;,
-                &quot;label&quot;: &quot;7&quot;,
-                &quot;page&quot;: 7,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://localhost:8000/api/transfer?page=8&quot;,
-                &quot;label&quot;: &quot;8&quot;,
-                &quot;page&quot;: 8,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://localhost:8000/api/transfer?page=9&quot;,
-                &quot;label&quot;: &quot;9&quot;,
-                &quot;page&quot;: 9,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://localhost:8000/api/transfer?page=10&quot;,
-                &quot;label&quot;: &quot;10&quot;,
-                &quot;page&quot;: 10,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: null,
-                &quot;label&quot;: &quot;...&quot;,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://localhost:8000/api/transfer?page=20&quot;,
-                &quot;label&quot;: &quot;20&quot;,
-                &quot;page&quot;: 20,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://localhost:8000/api/transfer?page=21&quot;,
-                &quot;label&quot;: &quot;21&quot;,
-                &quot;page&quot;: 21,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://localhost:8000/api/transfer?page=2&quot;,
-                &quot;label&quot;: &quot;Next &amp;raquo;&quot;,
-                &quot;page&quot;: 2,
-                &quot;active&quot;: false
-            }
-        ],
-        &quot;path&quot;: &quot;http://localhost:8000/api/transfer&quot;,
-        &quot;per_page&quot;: 5,
-        &quot;to&quot;: 5,
-        &quot;total&quot;: 105
-    }
+    &quot;message&quot;: &quot;Server Error&quot;
 }</code>
  </pre>
     </span>
@@ -868,14 +705,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://127.0.0.1/api/transfer/1" \
+    --get "http://127.0.0.1/api/transfer/16" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1/api/transfer/1"
+    "http://127.0.0.1/api/transfer/16"
 );
 
 const headers = {
@@ -987,10 +824,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="transfer_id"                data-endpoint="GETapi-transfer--transfer_id-"
-               value="1"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the transfer. Example: <code>1</code></p>
+<p>The ID of the transfer. Example: <code>16</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>transfer</code></b>&nbsp;&nbsp;
@@ -1060,7 +897,7 @@ fetch(url, {
 
 <span id="example-responses-POSTapi-transfer">
             <blockquote>
-            <p>Example response (201):</p>
+            <p>Example response (500):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -1072,14 +909,7 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;data&quot;: {
-        &quot;id&quot;: 112,
-        &quot;payee_wallet_id&quot;: 2,
-        &quot;payer_wallet_id&quot;: 1,
-        &quot;amount&quot;: 100.5,
-        &quot;transfer_type&quot;: &quot;user_payment&quot;,
-        &quot;created_at&quot;: &quot;2025-12-24T14:43:02.000000Z&quot;
-    }
+    &quot;message&quot;: &quot;Server Error&quot;
 }</code>
  </pre>
     </span>
@@ -1247,7 +1077,7 @@ fetch(url, {
 
 <span id="example-responses-GETapi-wallet">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (500):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -1259,67 +1089,7 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;data&quot;: [
-        {
-            &quot;id&quot;: 4,
-            &quot;user_id&quot;: 4,
-            &quot;balance&quot;: &quot;0.00&quot;,
-            &quot;user_type&quot;: &quot;common&quot;
-        },
-        {
-            &quot;id&quot;: 3,
-            &quot;user_id&quot;: 3,
-            &quot;balance&quot;: &quot;70.60&quot;,
-            &quot;user_type&quot;: &quot;shop&quot;
-        },
-        {
-            &quot;id&quot;: 2,
-            &quot;user_id&quot;: 2,
-            &quot;balance&quot;: &quot;122.16&quot;,
-            &quot;user_type&quot;: &quot;common&quot;
-        },
-        {
-            &quot;id&quot;: 1,
-            &quot;user_id&quot;: 1,
-            &quot;balance&quot;: &quot;107.24&quot;,
-            &quot;user_type&quot;: &quot;common&quot;
-        }
-    ],
-    &quot;links&quot;: {
-        &quot;first&quot;: &quot;http://localhost:8000/api/wallet?page=1&quot;,
-        &quot;last&quot;: &quot;http://localhost:8000/api/wallet?page=1&quot;,
-        &quot;prev&quot;: null,
-        &quot;next&quot;: null
-    },
-    &quot;meta&quot;: {
-        &quot;current_page&quot;: 1,
-        &quot;from&quot;: 1,
-        &quot;last_page&quot;: 1,
-        &quot;links&quot;: [
-            {
-                &quot;url&quot;: null,
-                &quot;label&quot;: &quot;&amp;laquo; Previous&quot;,
-                &quot;page&quot;: null,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://localhost:8000/api/wallet?page=1&quot;,
-                &quot;label&quot;: &quot;1&quot;,
-                &quot;page&quot;: 1,
-                &quot;active&quot;: true
-            },
-            {
-                &quot;url&quot;: null,
-                &quot;label&quot;: &quot;Next &amp;raquo;&quot;,
-                &quot;page&quot;: null,
-                &quot;active&quot;: false
-            }
-        ],
-        &quot;path&quot;: &quot;http://localhost:8000/api/wallet&quot;,
-        &quot;per_page&quot;: 5,
-        &quot;to&quot;: 4,
-        &quot;total&quot;: 4
-    }
+    &quot;message&quot;: &quot;Server Error&quot;
 }</code>
  </pre>
     </span>
@@ -1410,14 +1180,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://127.0.0.1/api/wallet/3" \
+    --get "http://127.0.0.1/api/wallet/16" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1/api/wallet/3"
+    "http://127.0.0.1/api/wallet/16"
 );
 
 const headers = {
@@ -1434,7 +1204,7 @@ fetch(url, {
 
 <span id="example-responses-GETapi-wallet--id-">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (500):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -1446,12 +1216,7 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;data&quot;: {
-        &quot;id&quot;: 3,
-        &quot;user_id&quot;: 3,
-        &quot;balance&quot;: &quot;70.60&quot;,
-        &quot;user_type&quot;: &quot;shop&quot;
-    }
+    &quot;message&quot;: &quot;Server Error&quot;
 }</code>
  </pre>
     </span>
@@ -1534,10 +1299,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="GETapi-wallet--id-"
-               value="3"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the wallet. Example: <code>3</code></p>
+<p>The ID of the wallet. Example: <code>16</code></p>
             </div>
                     </form>
 
@@ -1573,7 +1338,7 @@ of type &quot;DEPOSIT&quot; and updates the wallet balance atomically.</h2>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://127.0.0.1/api/wallet/3/deposit" \
+    "http://127.0.0.1/api/wallet/16/deposit" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -1584,7 +1349,7 @@ of type &quot;DEPOSIT&quot; and updates the wallet balance atomically.</h2>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1/api/wallet/3/deposit"
+    "http://127.0.0.1/api/wallet/16/deposit"
 );
 
 const headers = {
@@ -1606,7 +1371,16 @@ fetch(url, {
 
 <span id="example-responses-POSTapi-wallet--wallet_id--deposit">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (500):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;error&quot;: &quot;Internal Server Error. Please try again later&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (500):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -1618,21 +1392,7 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;data&quot;: {
-        &quot;id&quot;: 3,
-        &quot;user_id&quot;: 3,
-        &quot;balance&quot;: &quot;170.60&quot;,
-        &quot;user_type&quot;: &quot;shop&quot;
-    }
-}</code>
- </pre>
-            <blockquote>
-            <p>Example response (500):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;error&quot;: &quot;Internal Server Error. Please try again later&quot;
+    &quot;message&quot;: &quot;Server Error&quot;
 }</code>
  </pre>
     </span>
@@ -1715,10 +1475,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="wallet_id"                data-endpoint="POSTapi-wallet--wallet_id--deposit"
-               value="3"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the wallet. Example: <code>3</code></p>
+<p>The ID of the wallet. Example: <code>16</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">

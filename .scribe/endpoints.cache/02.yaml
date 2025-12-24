@@ -47,8 +47,11 @@ endpoints:
     responses:
       -
         custom: []
-        status: 200
-        content: '{"data":[{"id":108,"payee_wallet_id":2,"payer_wallet_id":1,"amount":"1.12","transfer_type":"user_payment","created_at":"2025-12-24T14:39:25.000000Z"},{"id":107,"payee_wallet_id":2,"payer_wallet_id":1,"amount":"1.12","transfer_type":"user_payment","created_at":"2025-12-24T14:37:47.000000Z"},{"id":106,"payee_wallet_id":2,"payer_wallet_id":1,"amount":"1.12","transfer_type":"user_payment","created_at":"2025-12-24T14:37:01.000000Z"},{"id":105,"payee_wallet_id":2,"payer_wallet_id":1,"amount":"1.12","transfer_type":"user_payment","created_at":"2025-12-24T14:36:34.000000Z"},{"id":104,"payee_wallet_id":2,"payer_wallet_id":1,"amount":"1.12","transfer_type":"user_payment","created_at":"2025-12-24T14:35:17.000000Z"}],"links":{"first":"http:\/\/localhost:8000\/api\/transfer?page=1","last":"http:\/\/localhost:8000\/api\/transfer?page=21","prev":null,"next":"http:\/\/localhost:8000\/api\/transfer?page=2"},"meta":{"current_page":1,"from":1,"last_page":21,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfer?page=1","label":"1","page":1,"active":true},{"url":"http:\/\/localhost:8000\/api\/transfer?page=2","label":"2","page":2,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfer?page=3","label":"3","page":3,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfer?page=4","label":"4","page":4,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfer?page=5","label":"5","page":5,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfer?page=6","label":"6","page":6,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfer?page=7","label":"7","page":7,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfer?page=8","label":"8","page":8,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfer?page=9","label":"9","page":9,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfer?page=10","label":"10","page":10,"active":false},{"url":null,"label":"...","active":false},{"url":"http:\/\/localhost:8000\/api\/transfer?page=20","label":"20","page":20,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfer?page=21","label":"21","page":21,"active":false},{"url":"http:\/\/localhost:8000\/api\/transfer?page=2","label":"Next &raquo;","page":2,"active":false}],"path":"http:\/\/localhost:8000\/api\/transfer","per_page":5,"to":5,"total":105}}'
+        status: 500
+        content: |-
+          {
+              "message": "Server Error"
+          }
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -85,7 +88,7 @@ endpoints:
         name: transfer_id
         description: 'The ID of the transfer.'
         required: true
-        example: 1
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -103,7 +106,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      transfer_id: 1
+      transfer_id: 16
       transfer: 1
     queryParameters: []
     cleanQueryParameters: []
@@ -200,8 +203,11 @@ endpoints:
     responses:
       -
         custom: []
-        status: 201
-        content: '{"data":{"id":112,"payee_wallet_id":2,"payer_wallet_id":1,"amount":100.5,"transfer_type":"user_payment","created_at":"2025-12-24T14:43:02.000000Z"}}'
+        status: 500
+        content: |-
+          {
+              "message": "Server Error"
+          }
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json

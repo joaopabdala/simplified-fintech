@@ -37,8 +37,11 @@ endpoints:
     responses:
       -
         custom: []
-        status: 200
-        content: '{"data":[{"id":4,"user_id":4,"balance":"0.00","user_type":"common"},{"id":3,"user_id":3,"balance":"70.60","user_type":"shop"},{"id":2,"user_id":2,"balance":"122.16","user_type":"common"},{"id":1,"user_id":1,"balance":"107.24","user_type":"common"}],"links":{"first":"http:\/\/localhost:8000\/api\/wallet?page=1","last":"http:\/\/localhost:8000\/api\/wallet?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"http:\/\/localhost:8000\/api\/wallet?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"http:\/\/localhost:8000\/api\/wallet","per_page":5,"to":4,"total":4}}'
+        status: 500
+        content: |-
+          {
+              "message": "Server Error"
+          }
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -77,14 +80,14 @@ endpoints:
         name: id
         description: 'The ID of the wallet.'
         required: true
-        example: 3
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      id: 3
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -93,8 +96,11 @@ endpoints:
     responses:
       -
         custom: []
-        status: 200
-        content: '{"data":{"id":3,"user_id":3,"balance":"70.60","user_type":"shop"}}'
+        status: 500
+        content: |-
+          {
+              "message": "Server Error"
+          }
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -113,9 +119,7 @@ endpoints:
     metadata:
       custom: []
       groupName: Wallets
-      groupDescription: |-
-
-        APIs for managing user wallets, checking balances, and processing deposits.
+      groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
       title: |-
@@ -146,14 +150,14 @@ endpoints:
         name: wallet_id
         description: 'The ID of the wallet.'
         required: true
-        example: 3
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      wallet_id: 3
+      wallet_id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -174,15 +178,6 @@ endpoints:
     responses:
       -
         custom: []
-        status: 200
-        content: '{"data":{"id":3,"user_id":3,"balance":"170.60","user_type":"shop"}}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-      -
-        custom: []
         status: 500
         content: |-
           {
@@ -190,6 +185,18 @@ endpoints:
           }
         headers: []
         description: ''
+      -
+        custom: []
+        status: 500
+        content: |-
+          {
+              "message": "Server Error"
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
     responseFields: []
     auth: []
     controller: null

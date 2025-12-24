@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Log;
 
 use function response;
 
+/**
+ * @group Wallets
+ */
 class WalletDepositController extends Controller
 {
     /**
