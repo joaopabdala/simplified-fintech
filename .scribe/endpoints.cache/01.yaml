@@ -38,7 +38,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":[{"id":4,"user_id":4,"balance":"0.00","user_type":"common"},{"id":3,"user_id":3,"balance":"70.60","user_type":"shop"},{"id":2,"user_id":2,"balance":"185.32","user_type":"common"},{"id":1,"user_id":1,"balance":"44.08","user_type":"common"}],"links":{"first":"http:\/\/localhost:8000\/api\/wallet?page=1","last":"http:\/\/localhost:8000\/api\/wallet?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"http:\/\/localhost:8000\/api\/wallet?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"http:\/\/localhost:8000\/api\/wallet","per_page":5,"to":4,"total":4}}'
+        content: '{"data":[{"id":4,"user_id":4,"balance":"0.00","user_type":"common"},{"id":3,"user_id":3,"balance":"70.60","user_type":"shop"},{"id":2,"user_id":2,"balance":"122.16","user_type":"common"},{"id":1,"user_id":1,"balance":"107.24","user_type":"common"}],"links":{"first":"http:\/\/localhost:8000\/api\/wallet?page=1","last":"http:\/\/localhost:8000\/api\/wallet?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"http:\/\/localhost:8000\/api\/wallet?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"http:\/\/localhost:8000\/api\/wallet","per_page":5,"to":4,"total":4}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -124,7 +124,9 @@ endpoints:
         of type "DEPOSIT" and updates the wallet balance atomically.
       description: |-
         * @urlParam wallet int required The ID of the wallet. Example: 1
+
         * @bodyParam amount float required The amount to deposit. Must be positive. Example: 500.00
+
         * @response 200 {
         "data": {
         "id": 1,

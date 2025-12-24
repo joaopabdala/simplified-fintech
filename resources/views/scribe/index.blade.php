@@ -84,11 +84,11 @@
                     <a href="#transfers">Transfers</a>
                 </li>
                                     <ul id="tocify-subheader-transfers" class="tocify-subheader">
-                                                    <li class="tocify-item level-2" data-unique="transfers-GETapi-transfers">
-                                <a href="#transfers-GETapi-transfers">GET /api/transfers</a>
+                                                    <li class="tocify-item level-2" data-unique="transfers-GETapi-transfer">
+                                <a href="#transfers-GETapi-transfer">GET /api/transfers</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="transfers-GETapi-transfers--transfer_id-">
-                                <a href="#transfers-GETapi-transfers--transfer_id-">GET /api/transfer/{id}</a>
+                                                                                <li class="tocify-item level-2" data-unique="transfers-GETapi-transfer--transfer_id-">
+                                <a href="#transfers-GETapi-transfer--transfer_id-">GET /api/transfer/{id}</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="transfers-POSTapi-transfer">
                                 <a href="#transfers-POSTapi-transfer">POST /api/transfer</a>
@@ -124,7 +124,7 @@ of type "DEPOSIT" and updates the wallet balance atomically.</a>
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: December 23, 2025</li>
+        <li>Last updated: December 24, 2025</li>
     </ul>
 </div>
 
@@ -155,9 +155,6 @@ Note: These routes are public and used solely to populate the system with test u
 </p>
 
 <p>Create a user and a wallet.</p>
-<ul>
-<li>@bodyParam first_name string required Example: John</li>
-</ul>
 
 <span id="example-requests-POSTapi-register">
 <blockquote>Example request:</blockquote>
@@ -460,7 +457,7 @@ access-control-allow-origin: *
         &quot;document&quot;: &quot;12345678901&quot;,
         &quot;user_type&quot;: &quot;common&quot;
     },
-    &quot;token&quot;: &quot;5|W4cgvQzjO2KR1umNzQaUUWlbjxGkn10UoWfMHQ26551380dd&quot;
+    &quot;token&quot;: &quot;7|OwMyIXZTVJOXpL1Q02nOfTtLUJNNp4JLvngctebv55da9b42&quot;
 }</code>
  </pre>
     </span>
@@ -566,27 +563,27 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
     <p>APIs for viewing the history and details of transfers performed within the system.</p>
 
-                                <h2 id="transfers-GETapi-transfers">GET /api/transfers</h2>
+                                <h2 id="transfers-GETapi-transfer">GET /api/transfers</h2>
 
 <p>
 </p>
 
 <p>Retrieve a paginated list of all transfers (deposits included), sorted by the most recent.</p>
 
-<span id="example-requests-GETapi-transfers">
+<span id="example-requests-GETapi-transfer">
 <blockquote>Example request:</blockquote>
 
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://127.0.0.1/api/transfers?page=1" \
+    --get "http://127.0.0.1/api/transfer?page=1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1/api/transfers"
+    "http://127.0.0.1/api/transfer"
 );
 
 const params = {
@@ -607,7 +604,7 @@ fetch(url, {
 
 </span>
 
-<span id="example-responses-GETapi-transfers">
+<span id="example-responses-GETapi-transfer">
             <blockquote>
             <p>Example response (200):</p>
         </blockquote>
@@ -623,56 +620,56 @@ access-control-allow-origin: *
 <code class="language-json" style="max-height: 300px;">{
     &quot;data&quot;: [
         {
-            &quot;id&quot;: 72,
-            &quot;payee_wallet_id&quot;: 1,
-            &quot;payer_wallet_id&quot;: 2,
-            &quot;amount&quot;: &quot;10.12&quot;,
-            &quot;transfer_type&quot;: &quot;user_payment&quot;,
-            &quot;created_at&quot;: &quot;2025-12-22T20:33:03.000000Z&quot;
-        },
-        {
-            &quot;id&quot;: 71,
-            &quot;payee_wallet_id&quot;: 3,
-            &quot;payer_wallet_id&quot;: 2,
-            &quot;amount&quot;: &quot;10.12&quot;,
-            &quot;transfer_type&quot;: &quot;shop_payment&quot;,
-            &quot;created_at&quot;: &quot;2025-12-22T20:32:50.000000Z&quot;
-        },
-        {
-            &quot;id&quot;: 70,
-            &quot;payee_wallet_id&quot;: 3,
-            &quot;payer_wallet_id&quot;: 2,
-            &quot;amount&quot;: &quot;10.12&quot;,
-            &quot;transfer_type&quot;: &quot;shop_payment&quot;,
-            &quot;created_at&quot;: &quot;2025-12-22T19:50:15.000000Z&quot;
-        },
-        {
-            &quot;id&quot;: 69,
-            &quot;payee_wallet_id&quot;: 3,
-            &quot;payer_wallet_id&quot;: 2,
-            &quot;amount&quot;: &quot;10.12&quot;,
-            &quot;transfer_type&quot;: &quot;shop_payment&quot;,
-            &quot;created_at&quot;: &quot;2025-12-22T19:50:11.000000Z&quot;
-        },
-        {
-            &quot;id&quot;: 68,
+            &quot;id&quot;: 108,
             &quot;payee_wallet_id&quot;: 2,
             &quot;payer_wallet_id&quot;: 1,
-            &quot;amount&quot;: &quot;10.12&quot;,
+            &quot;amount&quot;: &quot;1.12&quot;,
             &quot;transfer_type&quot;: &quot;user_payment&quot;,
-            &quot;created_at&quot;: &quot;2025-12-22T19:45:11.000000Z&quot;
+            &quot;created_at&quot;: &quot;2025-12-24T14:39:25.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 107,
+            &quot;payee_wallet_id&quot;: 2,
+            &quot;payer_wallet_id&quot;: 1,
+            &quot;amount&quot;: &quot;1.12&quot;,
+            &quot;transfer_type&quot;: &quot;user_payment&quot;,
+            &quot;created_at&quot;: &quot;2025-12-24T14:37:47.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 106,
+            &quot;payee_wallet_id&quot;: 2,
+            &quot;payer_wallet_id&quot;: 1,
+            &quot;amount&quot;: &quot;1.12&quot;,
+            &quot;transfer_type&quot;: &quot;user_payment&quot;,
+            &quot;created_at&quot;: &quot;2025-12-24T14:37:01.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 105,
+            &quot;payee_wallet_id&quot;: 2,
+            &quot;payer_wallet_id&quot;: 1,
+            &quot;amount&quot;: &quot;1.12&quot;,
+            &quot;transfer_type&quot;: &quot;user_payment&quot;,
+            &quot;created_at&quot;: &quot;2025-12-24T14:36:34.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 104,
+            &quot;payee_wallet_id&quot;: 2,
+            &quot;payer_wallet_id&quot;: 1,
+            &quot;amount&quot;: &quot;1.12&quot;,
+            &quot;transfer_type&quot;: &quot;user_payment&quot;,
+            &quot;created_at&quot;: &quot;2025-12-24T14:35:17.000000Z&quot;
         }
     ],
     &quot;links&quot;: {
-        &quot;first&quot;: &quot;http://localhost:8000/api/transfers?page=1&quot;,
-        &quot;last&quot;: &quot;http://localhost:8000/api/transfers?page=15&quot;,
+        &quot;first&quot;: &quot;http://localhost:8000/api/transfer?page=1&quot;,
+        &quot;last&quot;: &quot;http://localhost:8000/api/transfer?page=21&quot;,
         &quot;prev&quot;: null,
-        &quot;next&quot;: &quot;http://localhost:8000/api/transfers?page=2&quot;
+        &quot;next&quot;: &quot;http://localhost:8000/api/transfer?page=2&quot;
     },
     &quot;meta&quot;: {
         &quot;current_page&quot;: 1,
         &quot;from&quot;: 1,
-        &quot;last_page&quot;: 15,
+        &quot;last_page&quot;: 21,
         &quot;links&quot;: [
             {
                 &quot;url&quot;: null,
@@ -681,61 +678,61 @@ access-control-allow-origin: *
                 &quot;active&quot;: false
             },
             {
-                &quot;url&quot;: &quot;http://localhost:8000/api/transfers?page=1&quot;,
+                &quot;url&quot;: &quot;http://localhost:8000/api/transfer?page=1&quot;,
                 &quot;label&quot;: &quot;1&quot;,
                 &quot;page&quot;: 1,
                 &quot;active&quot;: true
             },
             {
-                &quot;url&quot;: &quot;http://localhost:8000/api/transfers?page=2&quot;,
+                &quot;url&quot;: &quot;http://localhost:8000/api/transfer?page=2&quot;,
                 &quot;label&quot;: &quot;2&quot;,
                 &quot;page&quot;: 2,
                 &quot;active&quot;: false
             },
             {
-                &quot;url&quot;: &quot;http://localhost:8000/api/transfers?page=3&quot;,
+                &quot;url&quot;: &quot;http://localhost:8000/api/transfer?page=3&quot;,
                 &quot;label&quot;: &quot;3&quot;,
                 &quot;page&quot;: 3,
                 &quot;active&quot;: false
             },
             {
-                &quot;url&quot;: &quot;http://localhost:8000/api/transfers?page=4&quot;,
+                &quot;url&quot;: &quot;http://localhost:8000/api/transfer?page=4&quot;,
                 &quot;label&quot;: &quot;4&quot;,
                 &quot;page&quot;: 4,
                 &quot;active&quot;: false
             },
             {
-                &quot;url&quot;: &quot;http://localhost:8000/api/transfers?page=5&quot;,
+                &quot;url&quot;: &quot;http://localhost:8000/api/transfer?page=5&quot;,
                 &quot;label&quot;: &quot;5&quot;,
                 &quot;page&quot;: 5,
                 &quot;active&quot;: false
             },
             {
-                &quot;url&quot;: &quot;http://localhost:8000/api/transfers?page=6&quot;,
+                &quot;url&quot;: &quot;http://localhost:8000/api/transfer?page=6&quot;,
                 &quot;label&quot;: &quot;6&quot;,
                 &quot;page&quot;: 6,
                 &quot;active&quot;: false
             },
             {
-                &quot;url&quot;: &quot;http://localhost:8000/api/transfers?page=7&quot;,
+                &quot;url&quot;: &quot;http://localhost:8000/api/transfer?page=7&quot;,
                 &quot;label&quot;: &quot;7&quot;,
                 &quot;page&quot;: 7,
                 &quot;active&quot;: false
             },
             {
-                &quot;url&quot;: &quot;http://localhost:8000/api/transfers?page=8&quot;,
+                &quot;url&quot;: &quot;http://localhost:8000/api/transfer?page=8&quot;,
                 &quot;label&quot;: &quot;8&quot;,
                 &quot;page&quot;: 8,
                 &quot;active&quot;: false
             },
             {
-                &quot;url&quot;: &quot;http://localhost:8000/api/transfers?page=9&quot;,
+                &quot;url&quot;: &quot;http://localhost:8000/api/transfer?page=9&quot;,
                 &quot;label&quot;: &quot;9&quot;,
                 &quot;page&quot;: 9,
                 &quot;active&quot;: false
             },
             {
-                &quot;url&quot;: &quot;http://localhost:8000/api/transfers?page=10&quot;,
+                &quot;url&quot;: &quot;http://localhost:8000/api/transfer?page=10&quot;,
                 &quot;label&quot;: &quot;10&quot;,
                 &quot;page&quot;: 10,
                 &quot;active&quot;: false
@@ -746,69 +743,69 @@ access-control-allow-origin: *
                 &quot;active&quot;: false
             },
             {
-                &quot;url&quot;: &quot;http://localhost:8000/api/transfers?page=14&quot;,
-                &quot;label&quot;: &quot;14&quot;,
-                &quot;page&quot;: 14,
+                &quot;url&quot;: &quot;http://localhost:8000/api/transfer?page=20&quot;,
+                &quot;label&quot;: &quot;20&quot;,
+                &quot;page&quot;: 20,
                 &quot;active&quot;: false
             },
             {
-                &quot;url&quot;: &quot;http://localhost:8000/api/transfers?page=15&quot;,
-                &quot;label&quot;: &quot;15&quot;,
-                &quot;page&quot;: 15,
+                &quot;url&quot;: &quot;http://localhost:8000/api/transfer?page=21&quot;,
+                &quot;label&quot;: &quot;21&quot;,
+                &quot;page&quot;: 21,
                 &quot;active&quot;: false
             },
             {
-                &quot;url&quot;: &quot;http://localhost:8000/api/transfers?page=2&quot;,
+                &quot;url&quot;: &quot;http://localhost:8000/api/transfer?page=2&quot;,
                 &quot;label&quot;: &quot;Next &amp;raquo;&quot;,
                 &quot;page&quot;: 2,
                 &quot;active&quot;: false
             }
         ],
-        &quot;path&quot;: &quot;http://localhost:8000/api/transfers&quot;,
+        &quot;path&quot;: &quot;http://localhost:8000/api/transfer&quot;,
         &quot;per_page&quot;: 5,
         &quot;to&quot;: 5,
-        &quot;total&quot;: 71
+        &quot;total&quot;: 105
     }
 }</code>
  </pre>
     </span>
-<span id="execution-results-GETapi-transfers" hidden>
+<span id="execution-results-GETapi-transfer" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-GETapi-transfers"></span>:
+                id="execution-response-status-GETapi-transfer"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-transfers"
+    <pre class="json"><code id="execution-response-content-GETapi-transfer"
       data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
 </span>
-<span id="execution-error-GETapi-transfers" hidden>
+<span id="execution-error-GETapi-transfer" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-transfers">
+    <pre><code id="execution-error-message-GETapi-transfer">
 
 Tip: Check that you&#039;re properly connected to the network.
 If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
 You can check the Dev Tools console for debugging information.</code></pre>
 </span>
-<form id="form-GETapi-transfers" data-method="GET"
-      data-path="api/transfers"
+<form id="form-GETapi-transfer" data-method="GET"
+      data-path="api/transfer"
       data-authed="0"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-transfers', this);">
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-transfer', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
                     <button type="button"
                     style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-transfers"
-                    onclick="tryItOut('GETapi-transfers');">Try it out ⚡
+                    id="btn-tryout-GETapi-transfer"
+                    onclick="tryItOut('GETapi-transfer');">Try it out ⚡
             </button>
             <button type="button"
                     style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-transfers"
-                    onclick="cancelTryOut('GETapi-transfers');" hidden>Cancel 🛑
+                    id="btn-canceltryout-GETapi-transfer"
+                    onclick="cancelTryOut('GETapi-transfer');" hidden>Cancel 🛑
             </button>&nbsp;&nbsp;
             <button type="submit"
                     style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-transfers"
+                    id="btn-executetryout-GETapi-transfer"
                     data-initial-text="Send Request 💥"
                     data-loading-text="⏱ Sending..."
                     hidden>Send Request 💥
@@ -816,7 +813,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </h3>
             <p>
             <small class="badge badge-green">GET</small>
-            <b><code>api/transfers</code></b>
+            <b><code>api/transfer</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
@@ -825,7 +822,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="GETapi-transfers"
+                              name="Content-Type"                data-endpoint="GETapi-transfer"
                value="application/json"
                data-component="header">
     <br>
@@ -837,7 +834,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="GETapi-transfers"
+                              name="Accept"                data-endpoint="GETapi-transfer"
                value="application/json"
                data-component="header">
     <br>
@@ -850,7 +847,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="page"                data-endpoint="GETapi-transfers"
+               step="any"               name="page"                data-endpoint="GETapi-transfer"
                value="1"
                data-component="query">
     <br>
@@ -858,27 +855,27 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                 </form>
 
-                    <h2 id="transfers-GETapi-transfers--transfer_id-">GET /api/transfer/{id}</h2>
+                    <h2 id="transfers-GETapi-transfer--transfer_id-">GET /api/transfer/{id}</h2>
 
 <p>
 </p>
 
 <p>Retrieve full details of a specific transaction, including payer, payee, and transfer type.</p>
 
-<span id="example-requests-GETapi-transfers--transfer_id-">
+<span id="example-requests-GETapi-transfer--transfer_id-">
 <blockquote>Example request:</blockquote>
 
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://127.0.0.1/api/transfers/1" \
+    --get "http://127.0.0.1/api/transfer/1" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1/api/transfers/1"
+    "http://127.0.0.1/api/transfer/1"
 );
 
 const headers = {
@@ -893,7 +890,7 @@ fetch(url, {
 
 </span>
 
-<span id="example-responses-GETapi-transfers--transfer_id-">
+<span id="example-responses-GETapi-transfer--transfer_id-">
             <blockquote>
             <p>Example response (200):</p>
         </blockquote>
@@ -911,43 +908,43 @@ fetch(url, {
 }</code>
  </pre>
     </span>
-<span id="execution-results-GETapi-transfers--transfer_id-" hidden>
+<span id="execution-results-GETapi-transfer--transfer_id-" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-GETapi-transfers--transfer_id-"></span>:
+                id="execution-response-status-GETapi-transfer--transfer_id-"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-transfers--transfer_id-"
+    <pre class="json"><code id="execution-response-content-GETapi-transfer--transfer_id-"
       data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
 </span>
-<span id="execution-error-GETapi-transfers--transfer_id-" hidden>
+<span id="execution-error-GETapi-transfer--transfer_id-" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-transfers--transfer_id-">
+    <pre><code id="execution-error-message-GETapi-transfer--transfer_id-">
 
 Tip: Check that you&#039;re properly connected to the network.
 If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
 You can check the Dev Tools console for debugging information.</code></pre>
 </span>
-<form id="form-GETapi-transfers--transfer_id-" data-method="GET"
-      data-path="api/transfers/{transfer_id}"
+<form id="form-GETapi-transfer--transfer_id-" data-method="GET"
+      data-path="api/transfer/{transfer_id}"
       data-authed="0"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-transfers--transfer_id-', this);">
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-transfer--transfer_id-', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
                     <button type="button"
                     style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-transfers--transfer_id-"
-                    onclick="tryItOut('GETapi-transfers--transfer_id-');">Try it out ⚡
+                    id="btn-tryout-GETapi-transfer--transfer_id-"
+                    onclick="tryItOut('GETapi-transfer--transfer_id-');">Try it out ⚡
             </button>
             <button type="button"
                     style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-transfers--transfer_id-"
-                    onclick="cancelTryOut('GETapi-transfers--transfer_id-');" hidden>Cancel 🛑
+                    id="btn-canceltryout-GETapi-transfer--transfer_id-"
+                    onclick="cancelTryOut('GETapi-transfer--transfer_id-');" hidden>Cancel 🛑
             </button>&nbsp;&nbsp;
             <button type="submit"
                     style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-transfers--transfer_id-"
+                    id="btn-executetryout-GETapi-transfer--transfer_id-"
                     data-initial-text="Send Request 💥"
                     data-loading-text="⏱ Sending..."
                     hidden>Send Request 💥
@@ -955,7 +952,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </h3>
             <p>
             <small class="badge badge-green">GET</small>
-            <b><code>api/transfers/{transfer_id}</code></b>
+            <b><code>api/transfer/{transfer_id}</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
@@ -964,7 +961,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="GETapi-transfers--transfer_id-"
+                              name="Content-Type"                data-endpoint="GETapi-transfer--transfer_id-"
                value="application/json"
                data-component="header">
     <br>
@@ -976,7 +973,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="GETapi-transfers--transfer_id-"
+                              name="Accept"                data-endpoint="GETapi-transfer--transfer_id-"
                value="application/json"
                data-component="header">
     <br>
@@ -989,7 +986,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="transfer_id"                data-endpoint="GETapi-transfers--transfer_id-"
+               step="any"               name="transfer_id"                data-endpoint="GETapi-transfer--transfer_id-"
                value="1"
                data-component="url">
     <br>
@@ -1001,7 +998,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="transfer"                data-endpoint="GETapi-transfers--transfer_id-"
+               step="any"               name="transfer"                data-endpoint="GETapi-transfer--transfer_id-"
                value="1"
                data-component="url">
     <br>
@@ -1017,10 +1014,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>This endpoint triggers a peer-to-peer (P2P) or P2B transfer.
 It validates balance, checks for external authorization, and processes
 the transaction atomically to ensure data integrity.</p>
-<ul>
-<li>@authenticated</li>
-<li>@bodyParam payer int required The ID of the user sending the funds. Example: 1</li>
-</ul>
 
 <span id="example-requests-POSTapi-transfer">
 <blockquote>Example request:</blockquote>
@@ -1029,6 +1022,7 @@ the transaction atomically to ensure data integrity.</p>
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
     "http://127.0.0.1/api/transfer" \
+    --header "X-Idempotency-Key: string A unique UUID to prevent duplicate transactions. Example: 550e8400-e29b-41d4-a716-446655440000" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -1045,6 +1039,7 @@ the transaction atomically to ensure data integrity.</p>
 );
 
 const headers = {
+    "X-Idempotency-Key": "string A unique UUID to prevent duplicate transactions. Example: 550e8400-e29b-41d4-a716-446655440000",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -1065,7 +1060,7 @@ fetch(url, {
 
 <span id="example-responses-POSTapi-transfer">
             <blockquote>
-            <p>Example response (422):</p>
+            <p>Example response (201):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -1077,7 +1072,14 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;error&quot;: &quot;Insufficient balance.&quot;
+    &quot;data&quot;: {
+        &quot;id&quot;: 112,
+        &quot;payee_wallet_id&quot;: 2,
+        &quot;payer_wallet_id&quot;: 1,
+        &quot;amount&quot;: 100.5,
+        &quot;transfer_type&quot;: &quot;user_payment&quot;,
+        &quot;created_at&quot;: &quot;2025-12-24T14:43:02.000000Z&quot;
+    }
 }</code>
  </pre>
     </span>
@@ -1128,6 +1130,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <b><code>api/transfer</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>X-Idempotency-Key</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="X-Idempotency-Key"                data-endpoint="POSTapi-transfer"
+               value="string A unique UUID to prevent duplicate transactions. Example: 550e8400-e29b-41d4-a716-446655440000"
+               data-component="header">
+    <br>
+<p>Example: <code>string A unique UUID to prevent duplicate transactions. Example: 550e8400-e29b-41d4-a716-446655440000</code></p>
+            </div>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
 &nbsp;
@@ -1261,13 +1275,13 @@ access-control-allow-origin: *
         {
             &quot;id&quot;: 2,
             &quot;user_id&quot;: 2,
-            &quot;balance&quot;: &quot;185.32&quot;,
+            &quot;balance&quot;: &quot;122.16&quot;,
             &quot;user_type&quot;: &quot;common&quot;
         },
         {
             &quot;id&quot;: 1,
             &quot;user_id&quot;: 1,
-            &quot;balance&quot;: &quot;44.08&quot;,
+            &quot;balance&quot;: &quot;107.24&quot;,
             &quot;user_type&quot;: &quot;common&quot;
         }
     ],
@@ -1535,16 +1549,22 @@ of type &quot;DEPOSIT&quot; and updates the wallet balance atomically.</h2>
 </p>
 
 <ul>
-<li>@urlParam wallet int required The ID of the wallet. Example: 1</li>
-<li>@bodyParam amount float required The amount to deposit. Must be positive. Example: 500.00</li>
-<li>@response 200 {
+<li>
+<p>@urlParam wallet int required The ID of the wallet. Example: 1</p>
+</li>
+<li>
+<p>@bodyParam amount float required The amount to deposit. Must be positive. Example: 500.00</p>
+</li>
+<li>
+<p>@response 200 {
 &quot;data&quot;: {
 &quot;id&quot;: 1,
 &quot;user_id&quot;: 1,
 &quot;balance&quot;: 500.00,
 &quot;user_type&quot;: &quot;common&quot;
 }
-}</li>
+}</p>
+</li>
 </ul>
 
 <span id="example-requests-POSTapi-wallet--wallet_id--deposit">

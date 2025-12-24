@@ -19,9 +19,7 @@ endpoints:
       subgroup: ''
       subgroupDescription: ''
       title: 'POST /api/register'
-      description: |-
-        Create a user and a wallet.
-        * @bodyParam first_name string required Example: John
+      description: 'Create a user and a wallet.'
       authenticated: false
       deprecated: false
     headers:
@@ -189,7 +187,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"user":{"id":4,"email":"john@example.com","email_verified_at":null,"created_at":"2025-12-23T16:07:25.000000Z","updated_at":"2025-12-23T16:07:25.000000Z","first_name":"b","last_name":"Doe","document":"12345678901","user_type":"common"},"token":"5|W4cgvQzjO2KR1umNzQaUUWlbjxGkn10UoWfMHQ26551380dd"}'
+        content: '{"user":{"id":4,"email":"john@example.com","email_verified_at":null,"created_at":"2025-12-23T16:07:25.000000Z","updated_at":"2025-12-23T16:07:25.000000Z","first_name":"b","last_name":"Doe","document":"12345678901","user_type":"common"},"token":"7|OwMyIXZTVJOXpL1Q02nOfTtLUJNNp4JLvngctebv55da9b42"}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
